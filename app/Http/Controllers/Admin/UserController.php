@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateProfileRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -12,7 +17,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.user');
+        $infor = Auth::user();
+
+        return view('admin.user.user', compact(
+            'infor'
+        ));
     }
 
     /**
@@ -26,7 +35,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UpdateProfileRequest $request)
     {
         //
     }
@@ -50,9 +59,28 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProfileRequest $request)
     {
-        //
+        $user = User::findOrFail(Auth::user()->getAttribute('id'));
+
+        $data = $request->validated();
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+
+            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+
+            $path = $file->store('avatars', 'public');
+            $data['avatar'] = $path;
+        }
+
+        if (!$user->update($data)) {
+            return back()->withErrors('Update profile error');
+        }
+
+        return back()->with('success', 'Update profile successfully');
     }
 
     /**

@@ -90,7 +90,7 @@
                           <a class="dropdown-item" href="javascript:void(0)"><i class="ti-wallet m-r-5 m-l-5"></i>
                               Logout</a>
                           <a class="dropdown-item" href="javascript:void(0)"><i class="ti-email m-r-5 m-l-5"></i>
-                              Logout</a>
+                              Email</a>
                       </div>
                   </li>
                   <!-- ============================================================== -->

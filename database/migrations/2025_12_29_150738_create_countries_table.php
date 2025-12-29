@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('phone')->after('password')->nullable();
-            $table->string('address')->after('phone')->nullable();
-            $table->string('avatar')->after('address')->nullable();
-            $table->integer('country_id')->after('avatar')->nullable();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('countries');
     }
 };
