@@ -28,6 +28,7 @@ class UpdateProfileRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg, png, jpg, gif', 'max:2048'],
+            'country_id' => ['required', 'string']
         ];
     }
 }

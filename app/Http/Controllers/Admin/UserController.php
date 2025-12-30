@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Models\Country;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -17,11 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $infor = Auth::user();
-
-        return view('admin.user.user', compact(
-            'infor'
-        ));
+        return view('admin.user.user', [
+            'user' => Auth::user()->load('country'),
+            'countries' => Country::get()
+        ]);
     }
 
     /**
@@ -66,19 +64,15 @@ class UserController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('avatar')) {
-            $file = $request->file('avatar');
-
-            if ($user->avatar && Storage::disk('public')->exists($user->avatar)) {
+            if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);
             }
-
-            $path = $file->store('avatars', 'public');
-            $data['avatar'] = $path;
+            $data['avatar'] = $request
+                ->file('avatar')
+                ->store('avatars', 'public');
         }
 
-        if (!$user->update($data)) {
-            return back()->withErrors('Update profile error');
-        }
+        $user->update($data);
 
         return back()->with('success', 'Update profile successfully');
     }

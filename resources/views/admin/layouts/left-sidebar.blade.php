@@ -29,6 +29,14 @@
                  </li>
 
                  <li class="sidebar-item">
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/blog"
+                         aria-expanded="false">
+                         <i class="mdi mdi-newspaper"></i>
+                         <span class="hide-menu">Blog</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/form-basic"
                          aria-expanded="false">
                          <i class="mdi mdi-arrange-bring-forward"></i>
