@@ -30,7 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/country', [CountryController::class, 'index'])->name('admin.country.index');
     Route::get('/admin/country/create', [CountryController::class, 'create']);
     Route::post('/admin/country', [CountryController::class, 'store']);
-    // Route::get('/admin/country/{country}', [CountryController::class, 'show']);
     Route::get('/admin/country/{country}/edit', [CountryController::class, 'edit']);
     Route::patch('/admin/country/{country}', [CountryController::class, 'update']);
     Route::delete('/admin/country/{country}', [CountryController::class, 'destroy']);
@@ -39,7 +38,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/blog', [BlogController::class, 'index'])->name('admin.blog.index');
     Route::get('/admin/blog/create', [BlogController::class, 'create']);
     Route::post('/admin/blog', [BlogController::class, 'store']);
-    // Route::get('/admin/blog/{country}', [BlogController::class, 'show']);
     Route::get('/admin/blog/{blog}/edit', [BlogController::class, 'edit']);
     Route::patch('/admin/blog/{blog}', [BlogController::class, 'update']);
     Route::delete('/admin/blog/{blog}', [BlogController::class, 'destroy']);
@@ -47,8 +45,4 @@ Route::middleware('auth')->group(function () {
 
 // Auth
 Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
