@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Member;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfileRequest extends FormRequest
+class MemberRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,11 @@ class UpdateProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:users, email'],
+            'email' => ['required', 'string', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'phone' => ['required', 'digits_between:9,20'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg, png, jpg, gif', 'max:2048'],
-            'country_id' => ['required', 'string']
+            'country_id' => ['required', 'string'],
         ];
     }
 }

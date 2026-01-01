@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
-use App\Http\Requests\StoreBlogRequest;
-use App\Http\Requests\UpdateBlogRequest;
+use App\Http\Requests\Admin\StoreBlogRequest;
+use App\Http\Requests\Admin\UpdateBlogRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('admin.blog.index', [
+        return view('admin.blogs.index', [
             'blogs' => Blog::get()
         ]);
     }
@@ -27,7 +27,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        return view('admin.blogs.create');
     }
 
     /**
@@ -47,7 +47,7 @@ class BlogController extends Controller
 
         Blog::create($data);
 
-        return redirect()->route('admin.blog.index');
+        return redirect()->route('admin.blogs.index');
     }
 
     /**
@@ -55,7 +55,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        return view('admin.blog.show', compact(
+        return view('admin.blogs.show', compact(
             'blog'
         ));
     }
@@ -65,7 +65,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return view('admin.blog.edit', compact(
+        return view('admin.blogs.edit', compact(
             'blog'
         ));
     }
@@ -88,7 +88,7 @@ class BlogController extends Controller
 
         $blog->update($data);
 
-        return redirect()->route('admin.blog.index');
+        return redirect()->route('admin.blogs.index');
     }
 
     /**
@@ -98,6 +98,6 @@ class BlogController extends Controller
     {
         $blog->delete();
 
-        return redirect()->route('admin.blog.index');
+        return redirect()->route('admin.blogs.index');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Requests\Admin\UpdateProfileRequest;
 use App\Models\Country;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.user.user', [
+        return view('admin.profiles.profile', [
             'user' => Auth::user()->load('country'),
             'countries' => Country::get()
         ]);
