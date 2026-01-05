@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
+use App\Http\Controllers\Member\CommentController;
 use App\Http\Controllers\Member\RateController;
 use App\Http\Controllers\Member\RegisterMemberController;
 use App\Http\Controllers\Member\SessionController;
@@ -63,6 +64,10 @@ Route::middleware(['auth', 'level: 0'])
         Route::post('/rate', [RateController::class, 'store'])
             ->name('rate.store');
 
+        // Comment blog
+        Route::post('/comments', [CommentController::class, 'store'])
+            ->name('comments.store');
+
         // Cart
         Route::get("/cart", function () {
             return view('frontend.carts.cart');
@@ -101,12 +106,13 @@ Route::middleware('guest')
 
         Route::get('/register', [RegisterMemberController::class, 'create']);
         Route::post('/register', [RegisterMemberController::class, 'register']);
-
-        // Blog
-        Route::get("/blog", [MemberBlogController::class, 'index']);
-        Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
-            ->name('blogs.show');
     });
+
+// Blog
+Route::get("/blog", [MemberBlogController::class, 'index']);
+Route::get('/blog/{blog}/comments', [CommentController::class, 'index']);
+Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
+    ->name('blogs.show');
 
 Route::post('/logout', [SessionController::class, 'logout'])
     ->middleware('auth')

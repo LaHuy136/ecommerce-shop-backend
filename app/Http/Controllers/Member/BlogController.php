@@ -43,8 +43,11 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        $blog->loadAvg('rates', 'rating')
-            ->loadCount('rates');
+        $blog->load('user')
+            ->loadAvg('rates', 'rating')
+            ->loadCount('rates')
+            ->loadCount('comments');
+
 
         $previousBlog = Blog::where('id', '<', $blog->id)
             ->orderBy('id', 'desc')

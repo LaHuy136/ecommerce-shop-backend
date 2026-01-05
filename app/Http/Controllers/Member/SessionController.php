@@ -69,6 +69,10 @@ class SessionController extends Controller
         $user = Auth::user();
         $data = $request->validated();
 
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
+
         if ($request->hasFile('avatar')) {
             if ($user->avatar) {
                 Storage::disk('public')->delete($user->avatar);

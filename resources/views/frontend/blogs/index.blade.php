@@ -1,4 +1,5 @@
 @extends('frontend.layouts.layout')
+
 @section('content')
     <section>
         <div class="container">
@@ -139,10 +140,13 @@
                             </div>
                         </div><!--/price-range-->
 
-                        <div class="shipping text-center"><!--shipping-->
-                            <img src="images/home/shipping.jpg" alt="" />
-                        </div><!--/shipping-->
+                        <!--shipping-->
+                        <div class="shipping text-center">
+                            <img src="{{ asset('frontend/images/home/shipping.jpg') }}" alt="" />
+                        </div>
+                        <!--/shipping-->
                     </div>
+
                 </div>
                 <div class="col-sm-9">
                     <div class="blog-post-area">
@@ -161,9 +165,7 @@
                                     </ul>
                                     {{-- Rating --}}
                                     <div class="rate" data-blog="{{ $blog->id }}"
-                                        data-rate="{{ number_format($blog->rates_avg_rating ?? 0, 1) }}"
-                                        style="float: right">
-
+                                        data-rate="{{ $blog->rates_avg_rating }}" style="float: right">
                                         <div class="vote rating-inline"
                                             style=" display: flex; align-items: center; gap: 8px;">
                                             <div class="rating-stars">
@@ -202,7 +204,7 @@
             </div>
         </div>
         <script src="{{ asset('frontend/js/jquery-1.9.1.min.js') }}"></script>
-        <script src="{{ asset('frontend/js/handleRating.js') }}"></script>
-        <script src="{{ asset('frontend/js/loadRating.js') }}"></script>
+        <script src="{{ asset('frontend/js/handle-rating.js') }}"></script>
+        <script src="{{ asset('frontend/js/load-rating.js') }}"></script>
     </section>
 @endsection

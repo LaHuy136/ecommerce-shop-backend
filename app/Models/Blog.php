@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Blog extends Model
@@ -26,8 +27,13 @@ class Blog extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function rates()
+    public function rates(): HasMany
     {
         return $this->hasMany(Rate::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

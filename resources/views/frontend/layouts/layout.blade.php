@@ -35,6 +35,7 @@
     });
 
     window.rateUrl = "{{ route('rate.store') }}";
+    window.commentStoreUrl = "{{ route('comments.store') }}";
     window.isLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
 </script>
 

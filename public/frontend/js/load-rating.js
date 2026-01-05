@@ -1,10 +1,9 @@
 $(".rate").each(function () {
-    let rating = $(this).data("rate");
-
+    let avgRating = Math.round($(this).data("rate"));
     $(this)
         .find(".ratings_stars")
         .each(function (index) {
-            if (index < rating) {
+            if ($(this).data("value") < avgRating) {
                 $(this).addClass("ratings_over");
             }
         });

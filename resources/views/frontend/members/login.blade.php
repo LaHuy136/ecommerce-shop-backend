@@ -1,19 +1,29 @@
 @extends('frontend.layouts.layout')
 
+
 @section('content')
     <section style="margin: 20px 20px">
         <div class="container">
             <div>
                 <div class="login-form">
                     <h2>Login to your account</h2>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> Notification!</h4>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="/login" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" placeholder="johnathan@example.com" class="form-control form-control-line"
                                 name="email" id="email">
-
                         </div>
 
                         <div class="form-group">
@@ -31,7 +41,6 @@
                                 Keep me signed in
                             </span>
                         </div>
-
                         <button type="submit" class="btn btn-default">Login</button>
                     </form>
                 </div>

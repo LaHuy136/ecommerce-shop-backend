@@ -31,8 +31,8 @@ class UpdateProfileRequest extends FormRequest
                 Rule::unique('users', 'email')
                     ->ignore(Auth::user()),
             ],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'digits_between:9,20'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'phone' => ['nullable', 'digits_between:9,20'],
             'address' => ['nullable', 'string', 'max:255'],
             'avatar' => ['nullable', 'image', 'mimes:jpeg, png, jpg, gif', 'max:2048'],
             'country_id' => ['required', 'integer']

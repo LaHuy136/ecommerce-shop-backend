@@ -31,13 +31,13 @@ class RateController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'blog_id' => 'required|exists:blogs,id',
-            'rating' => 'required|integer|min:1|max:5',
+            'blog_id' => ['required', 'exists:blogs,id'],
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
         ]);
 
         Rate::updateOrCreate(
             [
-                'user_id' => Auth::user()->getAttribute('id'),
+                'user_id' => Auth::user()->id,
                 'blog_id' => $request->blog_id,
             ],
             [

@@ -233,171 +233,58 @@
                     </ul> --}}
 
                     <div class="socials-share">
-                        <a href=""><img src="{{ asset('frontend/images/blog/socials.png') }}" alt=""></a>
+                        <a href="">
+                            <img src="{{ asset('frontend/images/blog/socials.png') }}" alt="">
+                        </a>
                     </div>
                 </div>
 
                 {{-- Comments --}}
                 <div class="response-area">
-                    <h2>3 RESPONSES</h2>
-                    <ul class="media-list">
-                        <li class="media">
 
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-two.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-four.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
-                        <li class="media second-media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{ asset('frontend/images/blog/man-three.jpg') }}"
-                                    alt="">
-                            </a>
-                            <div class="media-body">
-                                <ul class="sinlge-post-meta">
-                                    <li><i class="fa fa-user"></i>Janis Gallagher</li>
-                                    <li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-                                    <li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-                                </ul>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-                            </div>
-                        </li>
+                    @if ($blog->comments_count > 0)
+                        <h2> {{ $blog->comments_count }} RESPONSES</h2>
+                    @endif
+                    <ul class="media-list" id="comment-list">
+
                     </ul>
-                </div><!--/Response-area-->
+                </div>
+                <!--/Response-area-->
+
+                <!--Reply Box-->
                 <div class="replay-box">
                     <div class="row">
-                        <div class="col-sm-12">
-                            <h2>Leave a replay</h2>
-
-                            <div class="text-area">
-                                <div class="blank-arrow">
-                                    <label>Your Name</label>
-                                </div>
+                        <div class="col-sm-12" style="padding: 10px; margin: 0 20px">
+                            <div class="post-comment">
+                                <h2>Leave a reply</h2>
+                                @auth
+                                    <div class="blank-arrow">
+                                        <label>{{ Auth::user()->name }}</label>
+                                    </div>
+                                @else
+                                    <div class="blank-arrow">
+                                        <label class="text-muted">
+                                            Please login to comment
+                                        </label>
+                                    </div>
+                                @endauth
                                 <span>*</span>
-                                <textarea name="message" rows="11"></textarea>
-                                <a class="btn btn-primary" href="">post comment</a>
+
+                                <textarea id="comment-message" name="content" rows="5" placeholder="Your comment"></textarea>
+                                <input type="hidden" id="blog-id" value="{{ $blog->id }}">
+                                <input type="hidden" id="parent-id" value="">
+
+                                <button id="submit-comment" class="btn btn-primary">
+                                    Post comment
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div><!--/Repaly Box-->
+                </div>
+                <!--/Reply Box-->
             </div>
         </div>
-        </div>
+        <script src="{{ asset('frontend/js/jquery-1.9.1.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/handle-comment.js') }}"></script>
     </section>
 @endsection
