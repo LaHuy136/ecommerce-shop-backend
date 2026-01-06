@@ -94,6 +94,9 @@ Route::middleware(['auth', 'level: 0'])
         Route::get("/product/create", [ProductController::class, 'create']);
         Route::post("/product", [ProductController::class, 'store']);
         Route::get("/product/{product}", [ProductController::class, 'show']);
+        Route::get("/product/{product}/edit", [ProductController::class, 'edit']);
+        Route::patch("/product/{product}", [ProductController::class, 'update']);
+        Route::delete("/product/{product}", [ProductController::class, 'destroy']);
 
         // Error
         Route::get("/404", function () {

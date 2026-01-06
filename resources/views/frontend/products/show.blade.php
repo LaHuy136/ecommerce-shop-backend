@@ -151,8 +151,8 @@
                     <div class="product-details"><!--product-details-->
                         <div class="col-sm-5">
                             <div class="view-product">
-                                <img src="images/product-details/1.jpg" alt="" />
-                                <a href="images/product-details/1.jpg" rel="prettyPhoto">
+                                <img src="{{ asset('frontend/images/product-details/1.jpg') }}" alt="" />
+                                <a href="{{ asset('frontend/images/product-details/1.jpg') }}" rel="prettyPhoto">
                                     <h3>ZOOM</h3>
                                 </a>
 

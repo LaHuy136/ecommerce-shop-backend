@@ -61,19 +61,29 @@
                                                 <p>$ {{ $product->price }}</p>
                                             </td>
 
+                                            {{-- Edit --}}
                                             <td>
-                                                <a>
-                                                    <i style="font-size:18px" class="fa">&#xf044;</i>
-                                                </a>
+                                                <button class="btn btn-default">
+                                                    <a href="/product/{{ $product->id }}/edit">
+                                                        <i style="font-size:18px" class="fa">&#xf044;</i>
+                                                    </a>
+                                                </button>
                                             </td>
 
+                                            {{-- Delete --}}
                                             <td>
-                                                <a>
+                                                <button form="delete-form" class="btn btn-default">
                                                     <i style="font-size:18px" class="fa">&#xf00d;</i>
-                                                </a>
+                                                </button>
                                             </td>
                                         </tr>
                                     @endforeach
+
+                                    <form id="delete-form" method="POST" action="/product/{{ $product->id }}"
+                                        class="hidden">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
                                 </tbody>
                             </table>
                             <div class="pagination-area">
