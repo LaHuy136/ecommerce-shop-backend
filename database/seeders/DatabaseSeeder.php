@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Country;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,6 +24,10 @@ class DatabaseSeeder extends Seeder
     {
         $countries = Country::factory(10)->create();
 
+        $categories = Category::factory(10)->create();
+
+        $brands = Brand::factory(10)->create();
+
         $admin = User::factory()->create([
             'name' => 'admin',
             'email' => 'admin@example.com',
@@ -33,12 +40,15 @@ class DatabaseSeeder extends Seeder
             'level' => 0
         ]);
 
-        Blog::factory(10)->create([
-            'user_id' => $admin->id
-        ]);
+        // $products = Product::factory(20)->create([
+        //     'user_id'     => $users->random()->id,
+        //     'category_id' => $categories->random()->id,
+        //     'brand_id'    => $brands->random()->id,
+        // ]);
 
-        // Comment::factory(20)->create([
-        //     'user_id' =>
+
+        // Blog::factory(10)->create([
+        //     'user_id' => $admin->id
         // ]);
     }
 }

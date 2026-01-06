@@ -140,7 +140,7 @@
                             <li class="dropdown"><a href="{{ url('/shop') }}">Shop <i
                                         class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="{{ url('/shop') }}">Products</a></li>
+                                    <li><a href="{{ route('products.index') }}">Products</a></li>
                                     {{-- <li><a href="{{ url('/product-details') }}">Product Details</a></li> --}}
                                     <li><a href="{{ url('/checkout') }}">Checkout</a></li>
                                     <li><a href="{{ url('/cart') }}">Cart</a></li>
