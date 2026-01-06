@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CommentController;
+use App\Http\Controllers\Member\ProductController;
 use App\Http\Controllers\Member\RateController;
 use App\Http\Controllers\Member\RegisterMemberController;
 use App\Http\Controllers\Member\SessionController;
@@ -57,7 +58,8 @@ Route::middleware(['auth', 'level: 0'])
             ->name('member.dashboard');
 
         // Account
-        Route::get("/account", [SessionController::class, 'edit']);
+        Route::get("/account", [SessionController::class, 'edit'])
+            ->name('members.account');
         Route::patch("/account/{id}", [SessionController::class, 'update']);
 
         // Rating blog
@@ -81,16 +83,17 @@ Route::middleware(['auth', 'level: 0'])
             return view('frontend.contacts.contact-us');
         });
 
-        // Product
+        // Shop
         Route::get("/shop", function () {
             return view('frontend.products.shop');
         });
-        Route::get("/my-product", function () {
-            return view('frontend.products.my-product');
-        });
-        Route::get("/add-product", function () {
-            return view('frontend.products.add-product');
-        });
+
+        // Product
+        Route::get("/product", [ProductController::class, 'index'])
+            ->name('products.index');
+        Route::get("/product/create", [ProductController::class, 'create']);
+        Route::post("/product", [ProductController::class, 'store']);
+        Route::get("/product/{product}", [ProductController::class, 'show']);
 
         // Error
         Route::get("/404", function () {
