@@ -9,25 +9,6 @@
     <section>
         <div class="container">
             <div class="row">
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-check"></i> Notification!</h4>
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                @if (session('success'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><i class="icon fa fa-check"></i> Notification!</h4>
-                        {{ session('success') }}
-                    </div>
-                @endif
                 <div class="col-sm-3">
                     <div class="left-sidebar">
                         <h2>Account & Product</h2>
@@ -143,8 +124,8 @@
                                                 alt="Product Image" class="img-thumbnail">
 
                                             <div class="form-check mt-2">
-                                                <input type="checkbox" name="delete_images[]"
-                                                    value="{{ $img->id }}" id="delete_image_{{ $img->id }}">
+                                                <input type="checkbox" name="delete_images[]" value="{{ $img->id }}"
+                                                    id="delete_image_{{ $img->id }}">
                                                 <label for="delete_image_{{ $img->id }}">Delete this photo</label>
                                             </div>
                                         </div>
