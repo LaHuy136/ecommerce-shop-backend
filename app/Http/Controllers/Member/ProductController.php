@@ -16,6 +16,44 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductController extends Controller
 {
+    protected function handleGenerateUniqueFilename($request, ImageManager $manager)
+    {
+        if (!$request->hasFile('images')) {
+            return [];
+        }
+        $filenames = [];
+        foreach ($request->file('images') as $image) {
+
+            // Generate a unique filenname.(jpg, png, ...)
+            $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
+
+            // 85px width image
+            $img85 = $manager->read($image)
+                ->resize(85, 84)
+                ->encode();
+
+            Storage::disk('public')
+                ->put("products/85x84/{$filename}", $img85);
+
+            // 329px width image
+            $img329 = $manager->read($image)
+                ->resize(329, 380)
+                ->encode();
+
+            Storage::disk('public')
+                ->put("products/329x380/{$filename}", $img329);
+
+            // Full size image
+            $image->storeAs(
+                'products/full',
+                $filename,
+                'public'
+            );
+
+            $filenames[] = $filename;
+        }
+        return $filenames;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -64,40 +102,15 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        $filenames = $this->handleGenerateUniqueFilename($request, $manager);
 
-                // Generate a unique filenname.(jpg, png, ...)
-                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
-
-                // 85px width image
-                $img85 = $manager->read($image)
-                    ->resize(85, 84)
-                    ->encode();
-
-                Storage::disk('public')
-                    ->put("products/85x84/{$filename}", $img85);
-
-                // 329px width image
-                $img329 = $manager->read($image)
-                    ->resize(329, 380)
-                    ->encode();
-
-                Storage::disk('public')
-                    ->put("products/329x380/{$filename}", $img329);
-
-                // Full size image
-                $image->storeAs(
-                    'products/full',
-                    $filename,
-                    'public'
-                );
-
-                $product->images()->create([
+        $product->images()->createMany(
+            collect($filenames)
+                ->map(fn($filename) => [
                     'image' => $filename
-                ]);
-            }
-        }
+                ])
+                ->toArray()
+        );
 
         return redirect()->route('products.index')
             ->with('success', 'Product created successfully');
@@ -112,10 +125,9 @@ class ProductController extends Controller
             'frontend.products.show',
             [
                 'product' => $product,
-                'products' => Product::latest()
-                    ->orderBy('created_at', 'desc')
-                    ->take(6)
-                    ->get()
+                // 'products' => Product::latest()
+                //     ->orderBy('created_at', 'desc')
+                //     ->paginate(6)
             ]
         );
     }
@@ -185,39 +197,16 @@ class ProductController extends Controller
             }
         }
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
+        $filenames = $this->handleGenerateUniqueFilename($request, $manager);
 
-                // Generate a unique filenname.(jpg, png, ...)
-                $filename = Str::uuid() . '.' . $image->getClientOriginalExtension();
-
-                // 85px width image
-                $img85 = $manager->read($image)
-                    ->resize(85, 84)
-                    ->encode();
-
-                Storage::disk('public')
-                    ->put("products/85x84/{$filename}", $img85);
-
-                // 329px width image
-                $img329 = $manager->read($image)
-                    ->resize(329, 380)
-                    ->encode();
-
-                Storage::disk('public')
-                    ->put("products/329x380/{$filename}", $img329);
-
-                // Full size image
-                $image->storeAs(
-                    'products/full',
-                    $filename,
-                    'public'
-                );
-
-                $product->images()->create([
-                    'image' => $filename
-                ]);
-            }
+        if (!empty($filenames)) {
+            $product->images()->createMany(
+                collect($filenames)
+                    ->map(fn($filename) => [
+                        'image' => $filename
+                    ])
+                    ->toArray()
+            );
         }
 
         $product->update($data);
