@@ -23,7 +23,17 @@ class ProductController extends Controller
     {
         return view('frontend.products.index', [
             'products' => Product::orderBy('id')
+                ->whereIn('user_id', [Auth::user()->id])
                 ->paginate(10)
+        ]);
+    }
+
+    public function home()
+    {
+        return view('frontend.products.home', [
+            'products' => Product::latest()
+                ->orderBy('created_at', 'desc')
+                ->paginate(6)
         ]);
     }
 
@@ -100,7 +110,13 @@ class ProductController extends Controller
     {
         return view(
             'frontend.products.show',
-            compact('product')
+            [
+                'product' => $product,
+                'products' => Product::latest()
+                    ->orderBy('created_at', 'desc')
+                    ->take(6)
+                    ->get()
+            ]
         );
     }
 

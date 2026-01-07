@@ -83,12 +83,10 @@ Route::middleware(['auth', 'level: 0'])
             return view('frontend.contacts.contact-us');
         });
 
-        // Shop
-        Route::get("/shop", function () {
-            return view('frontend.products.shop');
-        });
 
         // Product
+        Route::get("/product/home", [ProductController::class, 'home'])
+            ->name('products.home');
         Route::get("/product", [ProductController::class, 'index'])
             ->name('products.index');
         Route::get("/product/create", [ProductController::class, 'create']);

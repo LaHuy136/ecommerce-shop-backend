@@ -137,7 +137,7 @@
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                            <li class="dropdown"><a href="{{ url('/shop') }}">Shop <i
+                            <li class="dropdown"><a href="{{ route('products.home') }}">Shop <i
                                         class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     <li><a href="{{ route('products.index') }}">Products</a></li>
