@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
+use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CommentController;
 use App\Http\Controllers\Member\ProductController;
 use App\Http\Controllers\Member\RateController;
@@ -71,9 +72,12 @@ Route::middleware(['auth', 'level: 0'])
             ->name('comments.store');
 
         // Cart
-        Route::get("/cart", function () {
-            return view('frontend.carts.cart');
-        });
+        Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart.index');
+        Route::post("/cart", [CartController::class, 'store'])
+            ->name('cart.store');
+
+
         Route::get("/checkout", function () {
             return view('frontend.carts.checkout');
         });

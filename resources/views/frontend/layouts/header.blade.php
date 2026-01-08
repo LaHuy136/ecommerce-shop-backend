@@ -60,7 +60,6 @@
                 <div class="col-md-8 clearfix">
                     <div class="shop-menu clearfix pull-right">
                         <ul class="nav navbar-nav">
-
                             @auth
                                 <li>
                                     <a href="{{ url('/account') }}">
@@ -81,10 +80,15 @@
                                 </li>
 
                                 <li>
-                                    <a href="{{ url('/cart') }}">
+                                    <a href="{{ route('cart.index') }}" class="nav-link position-relative">
                                         <i class="fa fa-shopping-cart"></i> Cart
+
+                                        <span id="cartQty" class="badge">
+                                            {{ $cartQty }}
+                                        </span>
                                     </a>
                                 </li>
+
 
                                 <li>
                                     <a href="{{ route('logout') }}"
@@ -169,4 +173,7 @@
         </div>
     </div>
     {{-- @endauth --}}
+
+    <script src="{{ asset('frontend/js/jquery-1.9.1.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/add-to-cart.js') }}"></script>
 </header><!--/header-->
