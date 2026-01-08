@@ -9,16 +9,17 @@
     @include('frontend.layouts.left-sidebar')
 
     <div class="col-sm-9 padding-right">
-        <div class="features_items"><!--features_items-->
+        <!--features_items-->
+        <div class="features_items">
             <h2 class="title text-center">Features Items</h2>
             @foreach ($products as $product)
                 <div class="col-sm-4">
-                    <div class="product-image-wrapper">
+                    <div class="product-image-wrapper" data-id="{{ $product->id }}">
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 {{-- Image --}}
                                 <img src="{{ asset('storage/products/full/' . $product->images->first()->image) }}"
-                                    alt="Product Image..." />
+                                    style="height: 320px" alt="Product Image..." />
 
                                 {{-- Price --}}
                                 <h2>$ {{ $product->price }}</h2>
@@ -61,5 +62,4 @@
             </ul>
         </div>
     </div>
-    </section>
 @endsection

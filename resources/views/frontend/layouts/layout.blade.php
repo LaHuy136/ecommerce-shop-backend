@@ -60,6 +60,7 @@
 
     window.rateUrl = "{{ route('rate.store') }}";
     window.commentStoreUrl = "{{ route('comments.store') }}";
+    window.cartAddUrl = "{{ route('cart.store') }}";
     window.isLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
 </script>
 
