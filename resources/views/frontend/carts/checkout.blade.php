@@ -160,7 +160,13 @@
 
                                         <tr>
                                             <td>
-                                                <button class="btn btn-default" id="btnOrder">Order</button>
+                                                <button class="btn btn-default" form="order-form" id="btnOrder">
+                                                    Order
+                                                </button>
+                                                <form id="order-form" action="/checkout/sendmail" method="POST"
+                                                    class="hidden">
+                                                    @csrf
+                                                </form>
                                             </td>
                                         </tr>
                                     </table>
@@ -170,7 +176,6 @@
                     </table>
                 </div>
             @endif
-
 
             {{-- Payment options --}}
             {{-- <div class="payment-options">
@@ -192,11 +197,13 @@
         const btnOrder = document.getElementById('btnOrder');
 
         btnOrder.addEventListener('click', function(e) {
-            e.preventDefault();
-
             if (!window.isLoggedIn) {
-                alert('Please register if you haven\'t account & login to order');
+                e.preventDefault();
+                alert('Please login to order');
+                return;
             }
+
+            document.getElementById('order-form').submit();
         })
 
         function toggeleShooperInformation() {

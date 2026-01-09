@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CheckoutController;
@@ -119,6 +120,7 @@ Route::post("/cart/{cart}", [CartController::class, 'update']);
 
 // Checkout
 Route::get("/checkout", [CheckoutController::class, 'index']);
+Route::post('/checkout/sendmail', [CheckoutController::class, 'store']);
 
 // Contact
 Route::get("/contact-us", function () {
@@ -128,8 +130,6 @@ Route::get("/contact-us", function () {
 Route::post('/logout', [SessionController::class, 'logout'])
     ->middleware('auth')
     ->name('logout');
-
-
 
 // Auth
 // Auth::routes();

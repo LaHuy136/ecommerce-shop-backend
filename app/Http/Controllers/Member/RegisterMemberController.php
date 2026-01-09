@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\RegisterMemberRequest;
 use App\Models\Country;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterMemberController extends Controller
 {
@@ -27,8 +28,11 @@ class RegisterMemberController extends Controller
                 ->store('members', 'public');
         }
 
-        User::create($data);
+        $user = User::create($data);
 
-        return redirect('/login');
+        Auth::login($user);
+
+        return redirect()
+            ->route('member.dashboard');
     }
 }

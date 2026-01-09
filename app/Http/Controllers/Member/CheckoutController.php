@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderShipped;
+use App\Models\History;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -39,7 +43,32 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cart = session()->get('cart', []);
+        $total    = array_sum(
+            array_map(
+                fn($i) => $i['price'] * $i['quantity'],
+                $cart
+            )
+        );
+
+        Mail::to(Auth::user()->email)
+            ->send(new OrderShipped(
+                $cart,
+                $total
+            ));
+
+        History::create([
+            'user_id' => Auth::user()->id,
+            'email' => Auth::user()->email,
+            'phone' => Auth::user()->phone,
+            'name' => Auth::user()->name,
+            'price' => $total
+        ]);
+
+        session()->forget('cart');
+
+        return redirect()->route('member.dashboard')
+            ->with('success', 'Order placed successfully');
     }
 
     /**
