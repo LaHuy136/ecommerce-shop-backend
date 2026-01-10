@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\History;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
-class HistoryController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $products = [];
+        if ($request->filled('name')) {
+            $products = Product::query()
+                ->with(['category', 'brand', 'images'])
+                ->where('name', 'LIKE', "%" . $request->name . "%")
+                ->paginate(6);
+        }
+
+        return view('frontend.products.home', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -34,7 +44,7 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(History $history)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +52,7 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(History $history)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +60,7 @@ class HistoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, History $history)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +68,7 @@ class HistoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(History $history)
+    public function destroy(string $id)
     {
         //
     }

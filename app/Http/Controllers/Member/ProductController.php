@@ -69,9 +69,12 @@ class ProductController extends Controller
     public function home()
     {
         return view('frontend.products.home', [
-            'products' => Product::latest()
+            'products' => Product::with(['category', 'brand', 'images'])
+                ->latest()
                 ->orderBy('created_at', 'desc')
-                ->paginate(6)
+                ->paginate(6),
+            'categories' => Category::get(),
+            'brands' => Brand::get()
         ]);
     }
 
