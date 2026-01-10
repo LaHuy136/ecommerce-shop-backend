@@ -14,6 +14,7 @@ use App\Http\Controllers\Member\ProductController;
 use App\Http\Controllers\Member\RateController;
 use App\Http\Controllers\Member\RegisterMemberController;
 use App\Http\Controllers\Member\SessionController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 // Admin
@@ -107,6 +108,8 @@ Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
     ->name('blogs.show');
 
 // Product
+Route::get('/product/search', [SearchController::class, 'index'])
+    ->name('products.search');
 Route::get("/product/home", [ProductController::class, 'home'])
     ->name('products.home');
 Route::get("/product/{product}", [ProductController::class, 'show']);
