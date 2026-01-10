@@ -60,58 +60,16 @@
                 </div>
             </div>
 
+            <div id="product-list">
+                @include('frontend.partials.product_list', [
+                    'products' => $products,
+                ])
+            </div>
 
-            @forelse ($products as $product)
-                <div class="col-sm-4">
-                    <div class="product-image-wrapper" data-id="{{ $product->id }}">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                {{-- Image --}}
-                                <img src="{{ asset('storage/products/full/' . $product->images->first()->image) }}"
-                                    style="height: 320px" alt="Product Image..." />
-
-                                {{-- Price --}}
-                                <h2>$ {{ $product->price }}</h2>
-
-                                {{-- Name --}}
-                                <p>{{ $product->name }}</p>
-
-                                <a href="#" class="btn btn-default add-to-cart">
-                                    <i class="fa fa-shopping-cart"></i> Add to cart</a>
-                            </div>
-
-                            <a href="/product/{{ $product->id }}">
-                                <div class="product-overlay">
-                                    <div class="overlay-content">
-                                        <h2>$ {{ $product->price }}</h2>
-                                        <p>{{ $product->name }}</p>
-                                        <a href="#" class="btn btn-default add-to-cart"><i
-                                                class="fa fa-shopping-cart"></i>Add to cart</a>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="choose">
-                            <ul class="nav nav-pills nav-justified">
-                                <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a>
-                                </li>
-                                <li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-center mt-4">
-                    {{ $products->links('pagination::bootstrap-4') }}
-                </div>
-            @empty
-                <div class="col-12 text-center">
-                    <h4>No products found</h4>
-                </div>
-            @endforelse
-
-            <ul class="pagination">
+            {{-- <ul class="pagination">
                 {{ $products->links('pagination::bootstrap-4') }}
-            </ul>
+            </ul> --}}
         </div>
     </div>
+    <script src="{{ asset('frontend/js/handle-search-by-price.js') }}"></script>
 @endsection

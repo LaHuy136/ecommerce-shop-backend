@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/price-range.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/rate.css') }}">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css">
     <title>@yield('title')</title>
 </head>
 
@@ -61,13 +63,15 @@
     window.rateUrl = "{{ route('rate.store') }}";
     window.commentStoreUrl = "{{ route('comments.store') }}";
     window.cartAddUrl = "{{ route('cart.store') }}";
+    window.filterPrice = "{{ route('products.filter.price') }}";
     window.isLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
 </script>
 
 <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.scrollUp.min.js') }}"></script>
-<script src="{{ asset('frontend/js/price-range.js') }}"></script>
+{{-- <script src="{{ asset('frontend/js/price-range.js') }}"></script> --}}
 <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"></script>
 
 </html>
