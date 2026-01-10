@@ -4,8 +4,6 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CheckoutController;
@@ -110,6 +108,8 @@ Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
 // Product
 Route::get('/product/search', [SearchController::class, 'index'])
     ->name('products.search');
+Route::post('/product/search', [SearchController::class, 'search'])
+    ->name('products.search.advanced');
 Route::get("/product/home", [ProductController::class, 'home'])
     ->name('products.home');
 Route::get("/product/{product}", [ProductController::class, 'show']);

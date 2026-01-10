@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Search By Name and Display a listing of the resource.
      */
     public function index(Request $request)
     {
@@ -16,12 +18,70 @@ class SearchController extends Controller
         if ($request->filled('name')) {
             $products = Product::query()
                 ->with(['category', 'brand', 'images'])
-                ->where('name', 'LIKE', "%" . $request->name . "%")
+                ->where('name', 'LIKE', '%' . $request->name . '%')
                 ->paginate(6);
         }
 
         return view('frontend.products.home', [
-            'products' => $products
+            'products' => $products,
+            'categories' => Category::get(),
+            'brands' => Brand::get()
+        ]);
+    }
+    /**
+     * Search Advanced and Display a listing of the resource.
+     */
+    public function search(Request $request)
+    {
+        $query = Product::query()
+            ->with(['category', 'brand', 'images']);
+
+
+        if ($request->filled('name')) {
+            $query->where(
+                'name',
+                'LIKE',
+                '%' . trim($request->name) . '%'
+            );
+        }
+
+        if ($request->filled('price')) {
+            switch ($request->price) {
+                case '0-60':
+                    $query->where('price', '<', 60);
+                    break;
+
+                case '60-200':
+                    $query->whereBetween(
+                        'price',
+                        [60, 200]
+                    );
+                    break;
+            }
+        }
+
+        if ($request->filled('category')) {
+            $query->where(
+                'category_id',
+                $request->category
+            );
+        }
+
+        if ($request->filled('brand')) {
+            $query->where(
+                'brand_id',
+                $request->brand
+            );
+        }
+
+        $products = $query
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('frontend.products.home', [
+            'products' => $products,
+            'categories' => Category::get(),
+            'brands' => Brand::get()
         ]);
     }
 

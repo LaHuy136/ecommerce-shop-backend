@@ -14,7 +14,7 @@
             <h2 class="title text-center">Features Items</h2>
             <div class="card" style="margin-left: 30px; margin-bottom: 10px">
                 <div class="card-body">
-                    <form action="/products/searchAdvanced" method="POST">
+                    <form action="{{ route('products.search.advanced') }}" method="POST" id="search-form">
                         @csrf
                         <div class="row g-3 align-items-end">
                             <div class="col-sm-3">
@@ -61,7 +61,7 @@
             </div>
 
 
-            @foreach ($products as $product)
+            @forelse ($products as $product)
                 <div class="col-sm-4">
                     <div class="product-image-wrapper" data-id="{{ $product->id }}">
                         <div class="single-products">
@@ -100,13 +100,16 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+                <div class="d-flex justify-content-center mt-4">
+                    {{ $products->links('pagination::bootstrap-4') }}
+                </div>
+            @empty
+                <div class="col-12 text-center">
+                    <h4>No products found</h4>
+                </div>
+            @endforelse
 
             <ul class="pagination">
-                {{-- <li class="active"><a href="">1</a></li>
-                                    <li><a href="">2</a></li>
-                                    <li><a href="">3</a></li>
-                                    <li><a href="">&raquo;</a></li> --}}
                 {{ $products->links('pagination::bootstrap-4') }}
             </ul>
         </div>
