@@ -8,6 +8,7 @@ use App\Http\Requests\Member\StoreProductRequest;
 use App\Http\Requests\Member\UpdateProductRequest;
 use App\Models\Brand;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -76,6 +77,21 @@ class ProductController extends Controller
             'categories' => Category::get(),
             'brands' => Brand::get()
         ]);
+    }
+
+    public function filterPrice(Request $request)
+    {
+        $min = $request->minPrice;
+        $max = $request->maxPrice;
+
+        $products = Product::whereBetween('price', [$min, $max])
+            ->latest()
+            ->paginate(6);
+
+        return view(
+            'frontend.partials.product_list',
+            compact('products')
+        )->render();
     }
 
     /**

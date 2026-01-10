@@ -110,6 +110,8 @@ Route::get('/product/search', [SearchController::class, 'index'])
     ->name('products.search');
 Route::post('/product/search', [SearchController::class, 'search'])
     ->name('products.search.advanced');
+Route::post('/products/filter-price', [ProductController::class, 'filterPrice'])
+    ->name('products.filter.price');
 Route::get("/product/home", [ProductController::class, 'home'])
     ->name('products.home');
 Route::get("/product/{product}", [ProductController::class, 'show']);
