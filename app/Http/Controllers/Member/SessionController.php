@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\LoginMemberRequest;
 use App\Http\Requests\Member\UpdateMemberRequest;
+use App\Mail\ForgotPassword;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class SessionController extends Controller

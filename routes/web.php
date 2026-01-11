@@ -8,9 +8,11 @@ use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CheckoutController;
 use App\Http\Controllers\Member\CommentController;
+use App\Http\Controllers\Member\ForgotPasswordController;
 use App\Http\Controllers\Member\ProductController;
 use App\Http\Controllers\Member\RateController;
 use App\Http\Controllers\Member\RegisterMemberController;
+use App\Http\Controllers\Member\ResetPasswordController;
 use App\Http\Controllers\Member\SessionController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
@@ -88,12 +90,24 @@ Route::middleware(['auth', 'level: 0'])
 
 Route::middleware('guest')
     ->group(function () {
+        // Login
         Route::get('/login', [SessionController::class, 'create'])
             ->name('login');
         Route::post('/login', [SessionController::class, 'login']);
 
+        // Register
         Route::get('/register', [RegisterMemberController::class, 'create']);
         Route::post('/register', [RegisterMemberController::class, 'register']);
+
+        // Forgot & Reset Password
+        Route::get('/forgot-password', [ForgotPasswordController::class, 'index']);
+        Route::post('/forgot-password', [ForgotPasswordController::class, 'create'])
+            ->name('password.forgot');
+
+        Route::get('/reset-password/{token}', [ResetPasswordController::class, 'show'])
+            ->name('password.reset');
+        Route::post('/reset-password', [ResetPasswordController::class, 'store'])
+            ->name('password.update');
     });
 
 Route::get("/", [SessionController::class, 'index'])
