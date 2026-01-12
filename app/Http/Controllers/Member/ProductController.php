@@ -73,9 +73,10 @@ class ProductController extends Controller
             'products' => Product::with(['category', 'brand', 'images'])
                 ->latest()
                 ->orderBy('created_at', 'desc')
-                ->paginate(6),
+                ->paginate(12),
             'categories' => Category::get(),
-            'brands' => Brand::get()
+            'brands' => Brand::withCount('products')
+                ->get()
         ]);
     }
 
@@ -144,9 +145,9 @@ class ProductController extends Controller
             'frontend.products.show',
             [
                 'product' => $product,
-                // 'products' => Product::latest()
-                //     ->orderBy('created_at', 'desc')
-                //     ->paginate(6)
+                'categories' => Category::get(),
+                'brands' => Brand::withCount('products')
+                    ->get()
             ]
         );
     }

@@ -11,23 +11,37 @@
             </div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('password.forgot') }}">
+                <h4>
+                    Please confirm your new password before continuing.
+                </h4>
+
+                <form method="POST" action="{{ route('password.update') }}">
                     @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="email" value="{{ $email }}">
+
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus
-                            class="form-control form-control-line" name="email" id="email">
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        <label for="password">Password</label>
+                        <input type="password" required autocomplete="new-password" autofocus
+                            class="form-control form-control-line" name="password" id="password">
                     </div>
 
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirm Password</label>
+                        <input type="password" required autocomplete="new-password" autofocus
+                            class="form-control form-control-line" name="password_confirmation" id="password_confirmation">
+                    </div>
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
                     <div class="row mb-0">
-                        <div class="col-md-6 offset-md-4">
+                        <div class="col-md-8 offset-md-4">
                             <button type="submit" class="btn btn-primary">
-                                Reset Password
+                                Confirm Password
                             </button>
                         </div>
                     </div>

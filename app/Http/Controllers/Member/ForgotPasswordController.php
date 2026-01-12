@@ -15,7 +15,7 @@ class ForgotPasswordController extends Controller
      */
     public function index()
     {
-        return view('frontend.members.passwords.reset');
+        return view('frontend.members.passwords.forgot');
     }
 
     /**

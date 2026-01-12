@@ -84,9 +84,12 @@
                 <h2 class="title text-center">Features Items</h2>
                 <div id="product-list">
                     @include('frontend.partials.product_list', [
-                        'products' => $products,
+                        'products' => $featuredProducts,
                     ])
                 </div>
+            </div>
+            <div class="justify-content-center mt-12">
+                {{ $featuredProducts->links('pagination::bootstrap-4') }}
             </div>
             <!--features_items-->
             <!--category-tab-->
@@ -406,7 +409,7 @@
                 <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="item active">
-                            @foreach ($products as $product)
+                            @foreach ($recommendProducts as $product)
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper" data-id="{{ $product->id }}">
                                         <div class="single-products">
@@ -450,7 +453,7 @@
                             @endforeach
                         </div>
                         <div class="item">
-                            @foreach ($products as $product)
+                            @foreach ($recommendProducts as $product)
                                 <div class="col-sm-4">
                                     <div class="product-image-wrapper" data-id="{{ $product->id }}">
                                         <div class="single-products">

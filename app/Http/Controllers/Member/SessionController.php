@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\LoginMemberRequest;
 use App\Http\Requests\Member\UpdateMemberRequest;
 use App\Mail\ForgotPassword;
+use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Country;
 use App\Models\Product;
 use App\Models\User;
@@ -19,8 +21,15 @@ class SessionController extends Controller
     public function index()
     {
         return view('frontend.index', [
-            'products' => Product::latest()
-                ->paginate(6)
+            'featuredProducts' => Product::with(['category', 'brand', 'images'])
+                ->latest()
+                ->orderBy('created_at', 'desc')
+                ->paginate(6),
+            'recommendProducts' => Product::latest()
+                ->take(3)
+                ->get(),
+            'categories' => Category::get(),
+            'brands' => Brand::withCount('products')->get()
         ]);
     }
 

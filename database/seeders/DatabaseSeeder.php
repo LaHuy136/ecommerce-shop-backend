@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,7 +25,7 @@ class DatabaseSeeder extends Seeder
     {
         $countries = Country::factory(10)->create();
 
-        $categories = Category::factory(10)->create();
+        $categories = Category::factory(11)->create();
 
         $brands = Brand::factory(10)->create();
 
@@ -40,15 +41,16 @@ class DatabaseSeeder extends Seeder
             'level' => 0
         ]);
 
-        // $products = Product::factory(20)->create([
-        //     'user_id'     => $users->random()->id,
-        //     'category_id' => $categories->random()->id,
-        //     'brand_id'    => $brands->random()->id,
-        // ]);
+        $products = Product::factory(20)->create();
 
+        $products->each(function ($product) {
+            ProductImage::factory(rand(3, 5))->create([
+                'product_id' => $product->id,
+            ]);
+        });
 
-        // Blog::factory(10)->create([
-        //     'user_id' => $admin->id
-        // ]);
+        Blog::factory(10)->create([
+            'user_id' => $admin->id
+        ]);
     }
 }

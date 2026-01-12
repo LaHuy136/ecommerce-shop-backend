@@ -2,9 +2,9 @@
 
 
 @section('content')
-    @include('frontend.layouts.left-sidebar')
+    {{-- @include('frontend.layouts.left-sidebar') --}}
 
-    <div class="col-sm-9 padding-right">
+    <div class="col-sm-12">
         <!--product-details-->
         <div class="product-details">
             <div class="col-sm-5">

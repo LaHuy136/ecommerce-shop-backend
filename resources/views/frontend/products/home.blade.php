@@ -6,7 +6,10 @@
             <img src="{{ asset('frontend/images/shop/advertisement.jpg') }}" alt="" />
         </div>
     </section>
-    @include('frontend.layouts.left-sidebar')
+    @include('frontend.layouts.left-sidebar', [
+        'categories' => $categories,
+        'brands' => $brands,
+    ])
 
     <div class="col-sm-9 padding-right">
         <!--features_items-->
@@ -65,10 +68,9 @@
                     'products' => $products,
                 ])
             </div>
-
-            {{-- <ul class="pagination">
-                {{ $products->links('pagination::bootstrap-4') }}
-            </ul> --}}
+        </div>
+        <div>
+            {{ $products->links('pagination::bootstrap-4') }}
         </div>
     </div>
     <script src="{{ asset('frontend/js/handle-search-by-price.js') }}"></script>

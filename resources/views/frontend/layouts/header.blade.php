@@ -30,8 +30,8 @@
             <div class="row">
                 <div class="col-md-4 clearfix">
                     <div class="logo pull-left">
-                        <a href="{{ url('/') }}"><img src="{{ asset('frontend/images/home/logo.png') }}"
-                                alt="" /></a>
+                        <a href="{{ route('member.dashboard') }}"><img
+                                src="{{ asset('frontend/images/home/logo.png') }}" alt="Logo Image..." /></a>
                     </div>
                     <div class="btn-group pull-right clearfix">
                         <div class="btn-group">
@@ -122,7 +122,6 @@
         </div>
     </div><!--/header-middle-->
 
-    {{-- @auth --}}
     <div class="header-bottom"><!--header-bottom-->
         <div class="container">
             <div class="row">
@@ -138,27 +137,41 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{ url('/') }}" class="active">Home</a></li>
-                            <li class="dropdown"><a href="{{ route('products.home') }}">Shop <i
-                                        class="fa fa-angle-down"></i></a>
+                            <li>
+                                <a href="{{ route('member.dashboard') }}" class="active">Home</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="{{ route('products.home') }}">
+                                    Shop <i class="fa fa-angle-down"></i>
+                                </a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="{{ route('products.index') }}">Products</a></li>
-                                    {{-- <li><a href="{{ url('/product-details') }}">Product Details</a></li> --}}
-                                    <li><a href="{{ url('/checkout') }}">Checkout</a></li>
-                                    <li><a href="{{ url('/cart') }}">Cart</a></li>
+                                    <li>
+                                        <a href="{{ route('products.index') }}">Products</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('checkout.index') }}">Checkout</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('cart.index') }}">Cart</a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="{{ url('/blog') }}">
+                                <a href="{{ route('blog.index') }}">
                                     Blog <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="{{ url('/blog') }}">Blog List</a></li>
-                                    {{-- <li><a href="{{ url('/blog-single') }}">Blog Single</a></li> --}}
+                                    <li>
+                                        <a href="{{ url('/blog') }}">Blog List</a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a href="{{ url('/404') }}">404</a></li>
-                            <li><a href="{{ url('/contact-us') }}">Contact</a></li>
+                            <li>
+                                <a href="{{ url('/404') }}">404</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/contact-us') }}">Contact</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -172,8 +185,22 @@
             </div>
         </div>
     </div>
-    {{-- @endauth --}}
+    <script>
+        const mainMenu = document.getElementsByClassName('mainmenu')[0];
+        const listItems = mainMenu.querySelectorAll('ul li');
 
+        listItems.forEach(function(li) {
+            li.addEventListener("click", function() {
+                a = this.querySelector("a");
+                console.log(a)
+                if (a.classList.contains("active")) {
+                    a.classList.remove("active");
+                } else {
+                    a.classList.add("active");
+                }
+            })
+        })
+    </script>
     <script src="{{ asset('frontend/js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ asset('frontend/js/add-to-cart.js') }}"></script>
 </header><!--/header-->

@@ -72,7 +72,7 @@ class ResetPasswordController extends Controller
      */
     public function show(Request $request, $token)
     {
-        return view('frontend.members.passwords.confirm', [
+        return view('frontend.members.passwords.reset', [
             'token' => $token,
             'email' => $request->email
         ]);

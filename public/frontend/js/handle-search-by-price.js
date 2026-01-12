@@ -1,6 +1,8 @@
 $(document).ready(function () {
     let slider = $("#sliderPrice").slider();
     let timer = null;
+    let minPrice = $("#minPrice");
+    let maxPrice = $("#maxPrice");
 
     slider.on("change", function (e) {
         clearTimeout(timer);
@@ -9,7 +11,8 @@ $(document).ready(function () {
             let min = e.value.newValue[0];
             let max = e.value.newValue[1];
 
-            console.log(min, max);
+            minPrice.text("$ " + min).css("font-weight", "bold");
+            maxPrice.text("$ " + max).css("font-weight", "bold");
             loadProduct(min, max);
         }, 300);
     });

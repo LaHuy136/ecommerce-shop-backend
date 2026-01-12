@@ -17,7 +17,18 @@ class BrandFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->company()
+            'name' => fake()->unique()->randomElement([
+                'Nike',
+                'Adidas',
+                'Zara',
+                'Under Armour',
+                'Gucci',
+                'Louis Vuitton',
+                'Asics',
+                'Puma',
+                'Mizuno',
+                'Head',
+            ])
         ];
     }
 }

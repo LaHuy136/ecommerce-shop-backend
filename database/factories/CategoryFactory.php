@@ -17,7 +17,19 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->unique()->company()
+            'name' => fake()->unique()->randomElement([
+                'T-Shirt',
+                'Blazers',
+                'Jeans',
+                'Polo',
+                'Shirt',
+                'Sportswear',
+                'Shoes',
+                'Bags',
+                'Underwear',
+                'Accessories',
+                'Perfume'
+            ])
         ];
     }
 }

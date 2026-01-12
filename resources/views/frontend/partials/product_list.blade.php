@@ -37,9 +37,6 @@
              </div>
          </div>
      </div>
-     <div class="d-flex justify-content-center mt-4">
-         {{ $products->links('pagination::bootstrap-4') }}
-     </div>
  @empty
      <h3 class="text-center col-12">
          Not found product

@@ -1,8 +1,8 @@
 @extends('frontend.layouts.layout')
 
 @section('content')
-    @include('frontend.layouts.left-sidebar')
-    <div class="col-sm-9">
+    {{-- @include('frontend.layouts.left-sidebar') --}}
+    <div class="col-sm-12">
         <div class="blog-post-area">
             <h2 class="title text-center">Latest From our Blog</h2>
             @foreach ($blogs as $blog)
@@ -49,7 +49,7 @@
                 </div>
             @endforeach
 
-            <div class="pagination-area">
+            <div class="justify-content-center" style="margin-top: 12px; padding-left: 0px;">
                 {{ $blogs->links('pagination::bootstrap-4') }}
             </div>
         </div>

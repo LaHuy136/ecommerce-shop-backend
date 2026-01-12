@@ -5,7 +5,12 @@
     <section style="margin: 20px 0px">
         <div class="container">
             <div class="login-form">
-                <h2 style="font-weight: bold">Login to your account</h2>
+                <div class="breadcrumbs">
+                    <ol class="breadcrumb">
+                        <li><a href="{{ route('member.dashboard') }}">Home</a></li>
+                        <li class="active">Login</li>
+                    </ol>
+                </div>
                 <form action="/login" method="POST">
                     @csrf
                     <div class="form-group">

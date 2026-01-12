@@ -114,7 +114,8 @@ Route::get("/", [SessionController::class, 'index'])
     ->name('member.dashboard');
 
 // Blog
-Route::get("/blog", [MemberBlogController::class, 'index']);
+Route::get("/blog", [MemberBlogController::class, 'index'])
+    ->name('blog.index');
 Route::get('/blog/{blog}/comments', [CommentController::class, 'index']);
 Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
     ->name('blogs.show');
@@ -138,7 +139,8 @@ Route::post("/cart", [CartController::class, 'store'])
 Route::post("/cart/{cart}", [CartController::class, 'update']);
 
 // Checkout
-Route::get("/checkout", [CheckoutController::class, 'index']);
+Route::get("/checkout", [CheckoutController::class, 'index'])
+    ->name('checkout.index');
 Route::post('/checkout/sendmail', [CheckoutController::class, 'store']);
 
 // Contact

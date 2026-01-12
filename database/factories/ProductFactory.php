@@ -19,14 +19,17 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $condition = fake()->randomElement(['new', 'sale']);
         return [
-            'user_id' => User::factory(),
-            'category_id' => Category::factory(),
-            'brand_id' => Brand::factory(),
+            'user_id' => User::inRandomOrder()->first()->id,
+            'category_id' => Category::inRandomOrder()->first()->id,
+            'brand_id' => Brand::inRandomOrder()->first()->id,
             'name' => fake()->name(),
             'price' => fake()->numberBetween(100, 1000),
-            'condition'   => fake()->randomElement(['new', 'sale']),
-            'sale_percent' => null,
+            'condition' => $condition,
+            'sale_percent' => $condition === 'sale'
+                ? fake()->numberBetween(5, 50)
+                : null,
             'company'     => fake()->company(),
             'status'      => 'available',
             'description' => fake()->sentence(),
