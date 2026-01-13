@@ -2,7 +2,7 @@
 
 @section('content')
     @include('admin.layouts.title', [
-        'title' => 'Edit user',
+        'title' => 'Edit User',
     ])
 
     <div class="container-fluid">

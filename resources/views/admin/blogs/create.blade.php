@@ -32,8 +32,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <button class="btn btn-success" style="margin-right: 10px;">Create Blog</button>
-                                <a href="/admin/blog" class="btn btn-danger float-right">Cancel</a>
+                                <button class="btn btn-success" style="margin-right: 10px;">Create</button>
+                                <a href="{{ route('admin.blogs') }}" class="btn btn-danger float-right">Cancel</a>
                             </div>
                         </div>
                     </form>

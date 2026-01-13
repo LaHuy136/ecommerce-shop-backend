@@ -15,8 +15,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <button class="btn btn-success">Create Country</button>
-                                <a href="/admin/country" class="btn btn-danger float-right">Cancel</a>
+                                <button class="btn btn-success">Create</button>
+                                <a href="{{ route('admin.countries') }}" class="btn btn-danger float-right">Cancel</a>
                             </div>
                         </div>
                     </form>

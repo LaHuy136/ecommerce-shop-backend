@@ -23,7 +23,11 @@
                         <tr>
                             @if ($user->level == 0)
                                 <th scope="row">{{ $user->id }}</th>
-                                <td>{{ $user->name }}</td>
+                                <td>
+                                    <a href="/admin/user/{{ $user->id }}">
+                                        {{ $user->name }}
+                                    </a>
+                                </td>
                                 <td>{{ $user->email }}</td>
                                 @if (empty($user->country->name))
                                     <td></td>

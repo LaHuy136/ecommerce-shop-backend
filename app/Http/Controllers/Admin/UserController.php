@@ -60,18 +60,20 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('admin.users.show', [
+            'user' => $user
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
         return view('admin.users.edit', [
-            'user' => User::findOrFail($id)->load('country'),
+            'user' => $user->load('country'),
             'countries' => Country::get()
         ]);
     }
@@ -79,9 +81,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $user = User::findOrFail($id);
         $data = $request->validated();
 
         if (empty($data['password'])) {

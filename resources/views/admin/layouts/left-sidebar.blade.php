@@ -39,8 +39,16 @@
                  <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.users') }}"
                          aria-expanded="false">
-                         <i class="mdi mdi-newspaper"></i>
+                         <i class="mdi mdi-account"></i>
                          <span class="hide-menu">User</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.products') }}"
+                         aria-expanded="false">
+                         <i class="mdi mdi-cart"></i>
+                         <span class="hide-menu">Product</span>
                      </a>
                  </li>
 
@@ -60,7 +68,7 @@
                      </a>
                  </li>
 
-                 <li class="sidebar-item">
+                 {{-- <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="icon-material.html"
                          aria-expanded="false">
                          <i class="mdi mdi-face"></i>
@@ -82,7 +90,7 @@
                          <i class="mdi mdi-alert-outline"></i>
                          <span class="hide-menu">404</span>
                      </a>
-                 </li>
+                 </li> --}}
              </ul>
          </nav>
          <!-- End Sidebar navigation -->
