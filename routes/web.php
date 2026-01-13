@@ -4,13 +4,14 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CheckoutController;
 use App\Http\Controllers\Member\CommentController;
 use App\Http\Controllers\Member\ForgotPasswordController;
-use App\Http\Controllers\Member\ProductController;
+use App\Http\Controllers\Member\ProductController as MemberProductController;
 use App\Http\Controllers\Member\RateController;
 use App\Http\Controllers\Member\RegisterMemberController;
 use App\Http\Controllers\Member\ResetPasswordController;
@@ -36,36 +37,57 @@ Route::prefix('admin')
         Route::get('/dashboard', [DashboardController::class, 'index'])
             ->name('admin.dashboard');
 
-        // User
-        Route::get('/user', [UserController::class, 'index'])
-            ->name('admin.users');
-        Route::get('/user/create', [UserController::class, 'create']);
-        Route::post('/user', [UserController::class, 'store']);
-        Route::get('/user/{id}/edit', [UserController::class, 'edit']);
-        Route::patch('/user/{id}', [UserController::class, 'update']);
-        Route::delete('/user/{user}', [UserController::class, 'destroy']);
         //  Profile
         Route::get('/profile', [ProfileController::class, 'index'])
             ->name('admin.profiles');
         Route::patch('/profile/{id}', [ProfileController::class, 'update']);
 
         // Country
-        Route::get('/country', [CountryController::class, 'index'])
-            ->name('admin.countries');
-        Route::get('/country/create', [CountryController::class, 'create']);
-        Route::post('/country', [CountryController::class, 'store']);
-        Route::get('/country/{country}/edit', [CountryController::class, 'edit']);
-        Route::patch('/country/{country}', [CountryController::class, 'update']);
-        Route::delete('/country/{country}', [CountryController::class, 'destroy']);
+        Route::prefix('country')->group(function () {
+            Route::get('/', [CountryController::class, 'index'])
+                ->name('admin.countries');
+            Route::get('/create', [CountryController::class, 'create']);
+            Route::post('/', [CountryController::class, 'store']);
+            Route::get('/{country}/edit', [CountryController::class, 'edit']);
+            Route::patch('/{country}', [CountryController::class, 'update']);
+            Route::delete('/{country}', [CountryController::class, 'destroy']);
+        });
 
         // Blog
-        Route::get('/blog', [AdminBlogController::class, 'index'])
-            ->name('admin.blogs');
-        Route::get('/blog/create', [AdminBlogController::class, 'create']);
-        Route::post('/blog', [AdminBlogController::class, 'store']);
-        Route::get('/blog/{blog}/edit', [AdminBlogController::class, 'edit']);
-        Route::patch('/blog/{blog}', [AdminBlogController::class, 'update']);
-        Route::delete('/blog/{blog}', [AdminBlogController::class, 'destroy']);
+        Route::prefix('blog')->group(function () {
+            Route::get('/', [AdminBlogController::class, 'index'])
+                ->name('admin.blogs');
+            Route::get('/create', [AdminBlogController::class, 'create']);
+            Route::post('/', [AdminBlogController::class, 'store']);
+            Route::get('/{blog}/edit', [AdminBlogController::class, 'edit']);
+            Route::patch('/{blog}', [AdminBlogController::class, 'update']);
+            Route::delete('/{blog}', [AdminBlogController::class, 'destroy']);
+        });
+
+        // User
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserController::class, 'index'])
+                ->name('admin.users');
+            Route::get('/create', [UserController::class, 'create']);
+            Route::get('/{user}', [UserController::class, 'show']);
+            Route::post('/', [UserController::class, 'store']);
+            Route::get('/{user}/edit', [UserController::class, 'edit']);
+            Route::patch('/{user}', [UserController::class, 'update']);
+            Route::delete('/{user}', [UserController::class, 'destroy']);
+        });
+
+        // Product
+        Route::prefix('product')->group(function () {
+            Route::get('/', [AdminProductController::class, 'index'])
+                ->name('admin.products');
+            Route::get('/search', [SearchController::class, 'searchByMemberName']);
+            Route::get('/create', [AdminProductController::class, 'create']);
+            Route::get('/{product}', [AdminProductController::class, 'show']);
+            Route::post('/', [AdminProductController::class, 'store']);
+            Route::get('/{product}/edit', [AdminProductController::class, 'edit']);
+            Route::patch('/{product}', [AdminProductController::class, 'update']);
+            Route::delete('/{product}', [AdminProductController::class, 'destroy']);
+        });
     });
 
 // User
@@ -86,14 +108,14 @@ Route::middleware(['auth', 'level: 0'])
             ->name('comments.store');
 
         // Product
-        Route::get("/product", [ProductController::class, 'index'])
+        Route::get("/product", [MemberProductController::class, 'index'])
             ->name('products.index');
-        Route::get("/product/create", [ProductController::class, 'create']);
-        Route::post("/product", [ProductController::class, 'store']);
+        Route::get("/product/create", [MemberProductController::class, 'create']);
+        Route::post("/product", [MemberProductController::class, 'store']);
 
-        Route::get("/product/{product}/edit", [ProductController::class, 'edit']);
-        Route::patch("/product/{product}", [ProductController::class, 'update']);
-        Route::delete("/product/{product}", [ProductController::class, 'destroy']);
+        Route::get("/product/{product}/edit", [MemberProductController::class, 'edit']);
+        Route::patch("/product/{product}", [MemberProductController::class, 'update']);
+        Route::delete("/product/{product}", [MemberProductController::class, 'destroy']);
 
         // Error
         Route::get("/404", function () {
@@ -134,15 +156,15 @@ Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
     ->name('blogs.show');
 
 // Product
-Route::get('/product/search', [SearchController::class, 'index'])
+Route::get('/product/search', [SearchController::class, 'searchByProductName'])
     ->name('products.search');
 Route::post('/product/search', [SearchController::class, 'search'])
     ->name('products.search.advanced');
-Route::post('/products/filter-price', [ProductController::class, 'filterPrice'])
+Route::post('/products/filter-price', [MemberProductController::class, 'filterPrice'])
     ->name('products.filter.price');
-Route::get("/product/home", [ProductController::class, 'home'])
+Route::get("/product/home", [MemberProductController::class, 'home'])
     ->name('products.home');
-Route::get("/product/{product}", [ProductController::class, 'show']);
+Route::get("/product/{product}", [MemberProductController::class, 'show']);
 
 // Cart
 Route::get('/cart', [CartController::class, 'index'])

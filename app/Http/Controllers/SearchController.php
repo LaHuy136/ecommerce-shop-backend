@@ -12,7 +12,7 @@ class SearchController extends Controller
     /**
      * Search By Name and Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function searchByProductName(Request $request)
     {
         $products = [];
         if ($request->filled('name')) {
@@ -82,6 +82,23 @@ class SearchController extends Controller
             'products' => $products,
             'categories' => Category::get(),
             'brands' => Brand::get()
+        ]);
+    }
+
+
+    /**
+     * Search Product By Member Name and Display a listing of the resource.
+     */
+    public function searchByMemberName(Request $request)
+    {
+        $products = Product::query()
+            ->join('users', 'products.user_id', '=', 'users.id')
+            ->where('users.name', 'LIKE', '%' . $request->memberName . '%')
+            ->select('products.*')
+            ->paginate(6);
+
+        return view('admin.products.searchResult', [
+            'products' => $products,
         ]);
     }
 

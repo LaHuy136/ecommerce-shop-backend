@@ -2,7 +2,7 @@
 
 @section('content')
     @include('admin.layouts.title', [
-        'title' => 'Create user',
+        'title' => 'Create User',
     ])
 
     <div class="container-fluid">
@@ -62,7 +62,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-default" type="submit">Create</button>
+                    <button class="btn btn-success" type="submit">Create</button>
+                    <a href="{{ route('admin.users') }}" class="btn btn-danger float-right">Cancel</a>
                 </div>
             </form>
         </div>
