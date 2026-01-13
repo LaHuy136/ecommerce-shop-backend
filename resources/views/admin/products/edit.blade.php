@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="price" class="col-md-12">Price</label>
+                            <label for="price" class="col-md-12">Price ($)</label>
 
                             <input type="number" class="form-control form-control-line" name="price"
                                 value="{{ $product->price }}">

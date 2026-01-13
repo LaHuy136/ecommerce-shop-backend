@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
@@ -88,6 +89,9 @@ Route::prefix('admin')
             Route::patch('/{product}', [AdminProductController::class, 'update']);
             Route::delete('/{product}', [AdminProductController::class, 'destroy']);
         });
+
+        // History
+        Route::get('/history', [HistoryController::class, 'index']);
     });
 
 // User

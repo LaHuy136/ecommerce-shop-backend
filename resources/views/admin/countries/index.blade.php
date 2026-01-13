@@ -29,11 +29,13 @@
                 </tbody>
             </table>
         </div>
+        <div style="padding-left: 15px">
+            {{ $countries->links('pagination::bootstrap-4') }}
+        </div>
     </div>
     <div class="row">
         <div class="col-5 align-self-center" style="margin-left:20px">
             <a href="/admin/country/create" class="btn btn-success">Create Country</a>
         </div>
     </div>
-    {{-- {{ $countries->links() }} --}}
 @endsection
