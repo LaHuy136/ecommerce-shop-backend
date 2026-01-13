@@ -2,27 +2,8 @@
 
 @section('content')
     @include('admin.layouts.title', [
-        'title' => 'Profile',
+        'title' => 'Edit user',
     ])
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Notification!</h4>
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Notification!</h4>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
 
     <div class="container-fluid">
         <div class="row">
@@ -34,15 +15,6 @@
                             <img src="{{ $user->avatar ? Storage::url($user->avatar) : asset('admin/assets/images/users/5.jpg') }}"
                                 class="rounded-circle" width="150" />
                             <h4 class="card-title m-t-10">{{ $user->name }}</h4>
-                            {{-- <h6 class="card-subtitle">Accoubts Manager Amix corp</h6> --}}
-                            {{-- <div class="row text-center justify-content-md-center">
-                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
-                                        <font class="font-medium">254</font>
-                                    </a></div>
-                                <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i>
-                                        <font class="font-medium">54</font>
-                                    </a></div>
-                            </div> --}}
                         </center>
                     </div>
                     <div>
@@ -71,8 +43,8 @@
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material" action="/admin/profile/{{ $user->id }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal form-material" action="/admin/user/{{ $user->id }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div pss="form-group">
@@ -122,13 +94,6 @@
                                 </div>
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label class="col-md-12">Message</label>
-                                <div class="col-md-12">
-                                    <textarea rows="5" name="message" class="form-control form-control-line"></textarea>
-                                </div>
-                            </div> --}}
-
                             <div class="form-group">
                                 <label for="country_id" class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
@@ -144,9 +109,15 @@
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success">Update Profile</button>
+                                    <button class="btn btn-success">Update</button>
+                                    <button class="btn btn-danger" form="delete-form">Delete</button>
+                                    <a href="{{ route('admin.users') }}" class="btn btn-danger float-right">Cancel</a>
                                 </div>
                             </div>
+                        </form>
+                        <form method="POST" action="/admin/user/{{ $user->id }}" id="delete-form" class="hidden">
+                            @csrf
+                            @method('DELETE')
                         </form>
                     </div>
                 </div>

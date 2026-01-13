@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Member\RegisterMemberRequest;
 use App\Models\Country;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
 class RegisterMemberController extends Controller
@@ -25,10 +26,12 @@ class RegisterMemberController extends Controller
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request
                 ->file('avatar')
-                ->store('members', 'public');
+                ->store('avatars/members', 'public');
         }
 
         $user = User::create($data);
+
+        event(new Registered($user));
 
         Auth::login($user);
 

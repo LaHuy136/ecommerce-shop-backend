@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Admin\Countries;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateBlogRequest extends FormRequest
+class UpdateCountryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,11 @@ class UpdateBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => [
+            'name' => [
                 'required',
                 'string',
-                Rule::unique('blogs', 'title')->ignore($this->blog)
-            ],
-            'image' => ['nullable', 'image', 'mimes:png,jpg,jpeg'],
-            'description' => ['required', 'string'],
-            'content' => ['required', 'string'],
+                Rule::unique('countries', 'name')->ignore($this->country)
+            ]
         ];
     }
 }

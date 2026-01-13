@@ -21,6 +21,10 @@
                         <div class="form-group">
                             <label for="image">Image</label>
                             <input type="file" name="image" class="form-control">
+
+                            <div style="margin: 10px 0">
+                                <img src="{{ $blog->image }}" alt="Blog Image..." width="150px" height="150px" />
+                            </div>
                         </div>
 
                         <div class="form-group">

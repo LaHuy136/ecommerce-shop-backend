@@ -23,10 +23,27 @@ class RegisterMemberRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'email' => ['required', 'string', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'phone' => ['required', 'digits_between:9,20'],
-            'avatar' => ['nullable', 'image', 'mimes:jpeg, png, jpg, gif', 'max:2048'],
+            'email' => [
+                'required',
+                'string',
+                'unique:users,email'
+            ],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed'
+            ],
+            'phone' => [
+                'required',
+                'digits_between:9,20'
+            ],
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:jpeg,png,jpg,gif',
+                'max:2048'
+            ],
             'country_id' => ['nullable', 'string'],
         ];
     }

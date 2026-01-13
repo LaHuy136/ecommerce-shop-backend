@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Member\CartController;
 use App\Http\Controllers\Member\CheckoutController;
@@ -32,14 +33,25 @@ Route::prefix('admin')
         });
 
         // Dashboard
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('admin.dashboard');
 
-        // Profile
-        Route::get('/profile', [UserController::class, 'index']);
-        Route::patch('/profile/{id}', [UserController::class, 'update']);
+        // User
+        Route::get('/user', [UserController::class, 'index'])
+            ->name('admin.users');
+        Route::get('/user/create', [UserController::class, 'create']);
+        Route::post('/user', [UserController::class, 'store']);
+        Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+        Route::patch('/user/{id}', [UserController::class, 'update']);
+        Route::delete('/user/{user}', [UserController::class, 'destroy']);
+        //  Profile
+        Route::get('/profile', [ProfileController::class, 'index'])
+            ->name('admin.profiles');
+        Route::patch('/profile/{id}', [ProfileController::class, 'update']);
 
         // Country
-        Route::get('/country', [CountryController::class, 'index'])->name('admin.countries.index');
+        Route::get('/country', [CountryController::class, 'index'])
+            ->name('admin.countries');
         Route::get('/country/create', [CountryController::class, 'create']);
         Route::post('/country', [CountryController::class, 'store']);
         Route::get('/country/{country}/edit', [CountryController::class, 'edit']);
@@ -47,7 +59,8 @@ Route::prefix('admin')
         Route::delete('/country/{country}', [CountryController::class, 'destroy']);
 
         // Blog
-        Route::get('/blog', [AdminBlogController::class, 'index'])->name('admin.blogs.index');
+        Route::get('/blog', [AdminBlogController::class, 'index'])
+            ->name('admin.blogs');
         Route::get('/blog/create', [AdminBlogController::class, 'create']);
         Route::post('/blog', [AdminBlogController::class, 'store']);
         Route::get('/blog/{blog}/edit', [AdminBlogController::class, 'edit']);

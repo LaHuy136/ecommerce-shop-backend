@@ -9,7 +9,7 @@
               <!-- Logo -->
               <!-- ============================================================== -->
               <div class="navbar-brand">
-                  <a href="index.html" class="logo">
+                  <a href="{{ route('admin.dashboard') }}" class="logo">
                       <!-- Logo icon -->
                       <b class="logo-icon">
                           <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -81,11 +81,12 @@
                   <!-- ============================================================== -->
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img
-                              src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle"
-                              width="31"></a>
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user"
+                              class="rounded-circle" width="31"></a>
                       <div class="dropdown-menu dropdown-menu-right user-dd animated">
-                          <a class="dropdown-item" href="/admin/profile"><i class="ti-user m-r-5 m-l-5"></i>
+                          <a class="dropdown-item" href="{{ route('admin.profiles') }}"><i
+                                  class="ti-user m-r-5 m-l-5"></i>
                               My Profile</a>
                           <a class="dropdown-item" href="{{ route('logout') }}"
                               onclick="event.preventDefault();

@@ -18,7 +18,7 @@
                             <div class="col-sm-12">
                                 <button class="btn btn-success" style="margin-right: 10px;">Update Country</button>
                                 <button class="btn btn-danger" form="delete-form">Delete Country</button>
-                                <a href="/admin/country" class="btn btn-danger float-right">Cancel</a>
+                                <a href="{{ route('admin.countries') }}" class="btn btn-danger float-right">Cancel</a>
                             </div>
                         </div>
                     </form>

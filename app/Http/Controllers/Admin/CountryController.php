@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Country;
-use App\Http\Requests\Admin\StoreCountryRequest;
-use App\Http\Requests\Admin\UpdateCountryRequest;
+use App\Http\Requests\Admin\Countries\StoreCountryRequest;
+use App\Http\Requests\Admin\Countries\UpdateCountryRequest;
 use App\Http\Controllers\Controller;
 
 class CountryController extends Controller
@@ -34,14 +34,14 @@ class CountryController extends Controller
     {
         $countryAttributes = $request->validated();
 
-        $country = Country::create($countryAttributes);
-
-        if (! $country) {
-            return back()->withErrors('Created country failed');
-        }
+        Country::create($countryAttributes);
 
         return redirect()
-            ->route('admin.countries.index');
+            ->route('admin.countries')
+            ->with(
+                'success',
+                'Created country successfully'
+            );;
     }
 
     /**
@@ -74,7 +74,11 @@ class CountryController extends Controller
         $country->update($data);
 
         return redirect()
-            ->route('admin.countries.index');
+            ->route('admin.countries')
+            ->with(
+                'success',
+                'Updated country successfully'
+            );;
     }
 
     /**
@@ -85,6 +89,10 @@ class CountryController extends Controller
         $country->deleteOrFail();
 
         return redirect()
-            ->route('admin.countries.index');
+            ->route('admin.countries')
+            ->with(
+                'success',
+                'Deleted country successfully'
+            );;
     }
 }

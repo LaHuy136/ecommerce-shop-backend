@@ -5,7 +5,7 @@
          <nav class="sidebar-nav">
              <ul id="sidebarnav">
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/dashboard"
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.dashboard') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-av-timer"></i>
                          <span class="hide-menu">Dashboard</span>
@@ -13,7 +13,7 @@
                  </li>
 
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/profile"
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.profiles') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-account-network"></i>
                          <span class="hide-menu">Profile</span>
@@ -21,7 +21,7 @@
                  </li>
 
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/country"
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.countries') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-border-none"></i>
                          <span class="hide-menu">Country</span>
@@ -29,10 +29,18 @@
                  </li>
 
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/blog"
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.blogs') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-newspaper"></i>
                          <span class="hide-menu">Blog</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.users') }}"
+                         aria-expanded="false">
+                         <i class="mdi mdi-newspaper"></i>
+                         <span class="hide-menu">User</span>
                      </a>
                  </li>
 

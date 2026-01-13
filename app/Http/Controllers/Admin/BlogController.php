@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Blog;
-use App\Http\Requests\Admin\StoreBlogRequest;
-use App\Http\Requests\Admin\UpdateBlogRequest;
+use App\Http\Requests\Admin\Blogs\StoreBlogRequest;
+use App\Http\Requests\Admin\Blogs\UpdateBlogRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +47,11 @@ class BlogController extends Controller
 
         Blog::create($data);
 
-        return redirect()->route('admin.blogs.index');
+        return redirect()
+            ->route('admin.blogs')->with(
+                'success',
+                'Created blog successfully'
+            );;
     }
 
     /**
@@ -88,7 +92,12 @@ class BlogController extends Controller
 
         $blog->update($data);
 
-        return redirect()->route('admin.blogs.index');
+        return redirect()
+            ->route('admin.blogs')
+            ->with(
+                'success',
+                'Updated blog successfully'
+            );;
     }
 
     /**
@@ -98,6 +107,11 @@ class BlogController extends Controller
     {
         $blog->delete();
 
-        return redirect()->route('admin.blogs.index');
+        return redirect()
+            ->route('admin.blogs')
+            ->with(
+                'success',
+                'Deleted blog successfully'
+            );;
     }
 }

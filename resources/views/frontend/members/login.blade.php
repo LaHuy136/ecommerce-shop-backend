@@ -29,7 +29,8 @@
                                     style="font-style: italic; font-weight: bold;">Forgot password ?</a>
                             </div>
                         </div>
-                        <input type="password" name="password" class="form-control form-control-line">
+                        <input type="password" name="password" placeholder="********"
+                            class="form-control form-control-line">
                     </div>
 
                     <div class="form-group">
