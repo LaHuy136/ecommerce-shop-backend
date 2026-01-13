@@ -53,6 +53,14 @@
                  </li>
 
                  <li class="sidebar-item">
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/history"
+                         aria-expanded="false">
+                         <i class="mdi mdi-history"></i>
+                         <span class="hide-menu">Order History</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/form-basic"
                          aria-expanded="false">
                          <i class="mdi mdi-arrange-bring-forward"></i>

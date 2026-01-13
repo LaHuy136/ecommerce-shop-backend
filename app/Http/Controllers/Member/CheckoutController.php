@@ -60,7 +60,6 @@ class CheckoutController extends Controller
         History::create([
             'user_id' => Auth::user()->id,
             'email' => Auth::user()->email,
-            'phone' => Auth::user()->phone,
             'name' => Auth::user()->name,
             'price' => $total
         ]);
