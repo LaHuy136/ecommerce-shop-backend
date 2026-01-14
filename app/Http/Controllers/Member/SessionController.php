@@ -25,7 +25,7 @@ class SessionController extends Controller
                 ->latest()
                 ->orderBy('created_at', 'desc')
                 ->paginate(6),
-            'recommendProducts' => Product::latest()
+            'recommendProducts' => Product::latest('created_at')
                 ->take(3)
                 ->get(),
             'categories' => Category::get(),
@@ -94,7 +94,7 @@ class SessionController extends Controller
             }
             $data['avatar'] = $request
                 ->file('avatar')
-                ->store('avatars', 'public');
+                ->store('avatars/members', 'public');
         }
 
         $user->update($data);

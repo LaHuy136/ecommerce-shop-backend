@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         return view('admin.users.index', [
-            'users' => User::get(),
+            'users' => User::all(),
         ]);
     }
 
@@ -28,7 +28,7 @@ class UserController extends Controller
     public function create()
     {
         return view('admin.users.create', [
-            'countries' => Country::get()
+            'countries' => Country::all()
         ]);
     }
 
@@ -45,7 +45,7 @@ class UserController extends Controller
         if ($request->hasFile('avatar')) {
             $data['avatar'] = $request
                 ->file('avatar')
-                ->store('avatars/users', 'public');
+                ->store('avatars/members', 'public');
         }
 
         User::create($data);
@@ -74,7 +74,7 @@ class UserController extends Controller
     {
         return view('admin.users.edit', [
             'user' => $user->load('country'),
-            'countries' => Country::get()
+            'countries' => Country::all()
         ]);
     }
 
@@ -95,7 +95,7 @@ class UserController extends Controller
             }
             $data['avatar'] = $request
                 ->file('avatar')
-                ->store('avatars/users', 'public');
+                ->store('avatars/members', 'public');
         }
 
         $user->update($data);

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Requests\Member;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class UpdateMemberRequest extends FormRequest
@@ -13,7 +12,14 @@ class UpdateMemberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+        $userId = $this->route('id');
+
+        if ($user->level === 1) {
+            return true;
+        }
+
+        return $user->id === $userId;
     }
 
     /**
@@ -29,7 +35,7 @@ class UpdateMemberRequest extends FormRequest
                 'required',
                 'email',
                 Rule::unique('users', 'email')
-                    ->ignore(Auth::user()),
+                    ->ignore($this->id),
             ],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'phone' => ['nullable', 'digits_between:9,20'],

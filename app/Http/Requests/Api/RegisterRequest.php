@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Member;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class UpdateMemberRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,20 +25,26 @@ class UpdateMemberRequest extends FormRequest
             'name' => ['required', 'string'],
             'email' => [
                 'required',
-                'email',
-                Rule::unique('users', 'email')
-                    ->ignore(Auth::user()),
+                'string',
+                'unique:users,email'
             ],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'phone' => ['nullable', 'digits_between:9,20'],
-            'address' => ['nullable', 'string', 'max:255'],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed'
+            ],
+            'phone' => [
+                'required',
+                'digits_between:9,20'
+            ],
             'avatar' => [
                 'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048'
             ],
-            'country_id' => 'required|exists:countries,id',
+            'country_id' => ['nullable', 'integer'],
         ];
     }
 }
