@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
-use App\Http\Requests\Api\RegisterRequest;
-use App\Http\Requests\Api\UpdateMemberRequest;
+use App\Http\Requests\Api\Member\RegisterMemberRequest as MemberRegisterMemberRequest;
+use App\Http\Requests\Api\Member\UpdateUserRequest as MemberUpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 
 class SessionController extends Controller
 {
-    public function register(RegisterRequest $request)
+    public function register(MemberRegisterMemberRequest $request)
     {
         $data = $request->validated();
         $data['level'] = 0;
@@ -123,9 +123,20 @@ class SessionController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function index()
+    {
+        return response()->json([
+            'status' => 200,
+            'data' => Auth::user()->load('country')
+        ], 200);
+    }
+
+    /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMemberRequest $request, string $id)
+    public function update(MemberUpdateUserRequest $request, string $id)
     {
         $user = User::findOrFail($id);
         $data = $request->validated();
@@ -149,28 +160,6 @@ class SessionController extends Controller
             'status' => 'success',
             'message' => 'Update profile successfully',
             'data' => $user
-        ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        if ($user->avatar) {
-            Storage::disk('public')->delete($user->avatar);
-        }
-
-        if (! $user->destroy($user->id)) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Failed to delete user'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Deleted user sucessfully'
         ], 200);
     }
 }

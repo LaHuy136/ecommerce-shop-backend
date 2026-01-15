@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Blog;
+use App\Http\Requests\Api\Admin\UpdateProfileRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-class BlogController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +17,8 @@ class BlogController extends Controller
     {
         return response()->json([
             'status' => 200,
-            'message' => Blog::paginate(5)
-        ]);
+            'data' => Auth::user()->load('country')
+        ], 200);
     }
 
     /**
@@ -54,9 +56,27 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProfileRequest $request)
     {
-        //
+        $user = Auth::user();
+        $data = $request->validated();
+
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete($user->avatar);
+            }
+            $data['avatar'] = $request
+                ->file('avatar')
+                ->store('avatars', 'public');
+        }
+
+        $user->update($data);
+
+        return back()->with('success', 'Update profile successfully');
     }
 
     /**

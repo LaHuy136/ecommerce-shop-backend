@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Blogs;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class RegisterRequest extends FormRequest
+class UpdateBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,29 +23,23 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'email' => [
+            'title' => [
                 'required',
                 'string',
-                'unique:users,email'
+                Rule::unique('blogs', 'title')->ignore($this->blog)
             ],
-            'password' => [
+            'slug' => [
                 'required',
                 'string',
-                'min:8',
-                'confirmed'
+                Rule::unique('blogs', 'slug')->ignore($this->blog)
             ],
-            'phone' => [
-                'required',
-                'digits_between:9,20'
-            ],
-            'avatar' => [
+            'image' => [
                 'nullable',
                 'image',
-                'mimes:jpeg,png,jpg,gif',
-                'max:2048'
+                'mimes:png,jpg,jpeg'
             ],
-            'country_id' => ['nullable', 'integer'],
+            'description' => ['required', 'string'],
+            'content' => ['required', 'string'],
         ];
     }
 }

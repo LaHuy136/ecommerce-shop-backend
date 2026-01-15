@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\History;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(
-            [
-                'status' => 'success',
-                'message' => Product::paginate(5)
-            ],
-            200
-        );
+        return response()->json([
+            'status' => 'success',
+            'message' => History::latest('created_at')
+                ->paginate(5)
+        ], 200);
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Member;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateMemberRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,13 +13,9 @@ class UpdateMemberRequest extends FormRequest
     public function authorize(): bool
     {
         $user = $this->user();
-        $userId = $this->route('id');
+        if (!$user) return false;
 
-        if ($user->level === 1) {
-            return true;
-        }
-
-        return $user->id === $userId;
+        return $user->id === (int) $this->route('id');
     }
 
     /**
@@ -35,7 +31,7 @@ class UpdateMemberRequest extends FormRequest
                 'required',
                 'email',
                 Rule::unique('users', 'email')
-                    ->ignore($this->id),
+                    ->ignore($this->route('id')),
             ],
             'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'phone' => ['nullable', 'digits_between:9,20'],
@@ -46,7 +42,7 @@ class UpdateMemberRequest extends FormRequest
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048'
             ],
-            'country_id' => 'required|exists:countries,id',
+            'country_id' => ['nullable', 'exists:countries,id'],
         ];
     }
 }
