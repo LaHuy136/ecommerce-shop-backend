@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form class="form-horizontal m-t-30" method="POST" action="/admin/country/{{ $country->id }}">
+                    <form class="form-horizontal m-t-30" method="POST" action="/admin/countries/{{ $country->id }}">
                         @csrf
                         @method('PATCH')
                         <div class="form-group">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                     </form>
-                    <form method="POST" action="/admin/country/{{ $country->id }}" id="delete-form" class="hidden">
+                    <form method="POST" action="/admin/countries/{{ $country->id }}" id="delete-form" class="hidden">
                         @csrf
                         @method('DELETE')
                     </form>

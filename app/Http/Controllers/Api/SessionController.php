@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\Member\RegisterMemberRequest as MemberRegisterMemberRequest;
-use App\Http\Requests\Api\Member\UpdateUserRequest as MemberUpdateUserRequest;
+use App\Http\Requests\Api\Member\UpdateMemberRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -136,7 +136,7 @@ class SessionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(MemberUpdateUserRequest $request, string $id)
+    public function update(UpdateMemberRequest $request, string $id)
     {
         $user = User::findOrFail($id);
         $data = $request->validated();

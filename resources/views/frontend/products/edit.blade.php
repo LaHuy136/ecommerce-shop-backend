@@ -135,9 +135,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Description</label>
                                     <div class="col-md-12">
-                                        <textarea rows="5" name="description" class="form-control form-control-line">
-                                            {{ $product->description }}
-                                        </textarea>
+                                        <textarea rows="5" name="description" class="form-control form-control-line">{{ $product->description }}</textarea>
                                     </div>
                                 </div>
 

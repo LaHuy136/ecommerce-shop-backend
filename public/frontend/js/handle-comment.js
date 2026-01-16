@@ -7,7 +7,7 @@ function loadComments() {
     const blogId = $("#blog-id").val();
 
     $.ajax({
-        url: `/blog/${blogId}/comments`,
+        url: `/blogs/${blogId}/comments`,
         method: "GET",
         success: function (comments) {
             $("#comment-list").html("");

@@ -48,7 +48,7 @@
 
                                 <td class="flex flex-col items-center">
                                     <button class="btn btn-primary"><a style="color: white"
-                                            href="/admin/product/{{ $product->id }}/edit">Edit</a></button>
+                                            href="/admin/products/{{ $product->id }}/edit">Edit</a></button>
                                 </td>
                             </tr>
                         @endforeach
@@ -61,7 +61,7 @@
         </div>
         <div class="row">
             <div class="col-5 align-self-center" style="margin-left:20px">
-                <a href="/admin/product/create" class="btn btn-success">Create Product</a>
+                <a href="/admin/products/create" class="btn btn-success">Create Product</a>
             </div>
         </div>
     @endsection

@@ -45,7 +45,7 @@
                                             <td>{{ $product->id }}</td>
 
                                             <td class="cart_product">
-                                                <a href="/product/{{ $product->id }}">
+                                                <a href="/products/{{ $product->id }}">
                                                     <img src="{{ asset('storage/products/85x84/' . $product->images->first()->image) }}"
                                                         alt="Image Product...">
                                                 </a>
@@ -53,7 +53,7 @@
 
                                             <td class="cart_description">
                                                 <h4>
-                                                    <a href="/product/{{ $product->id }}">{{ $product->name }}</a>
+                                                    {{ $product->name }}
                                                 </h4>
                                             </td>
 
@@ -64,7 +64,7 @@
                                             {{-- Edit --}}
                                             <td>
                                                 <button class="btn btn-default">
-                                                    <a href="/product/{{ $product->id }}/edit">
+                                                    <a href="/products/{{ $product->id }}/edit">
                                                         <i style="font-size:18px" class="fa">&#xf044;</i>
                                                     </a>
                                                 </button>
@@ -79,7 +79,7 @@
                                         </tr>
                                     @endforeach
 
-                                    <form id="delete-form" method="POST" action="/product/{{ $product->id }}"
+                                    <form id="delete-form" method="POST" action="/products/{{ $product->id }}"
                                         class="hidden">
                                         @csrf
                                         @method('DELETE')
@@ -92,7 +92,7 @@
                         @endif
                     </div>
                     <div class="form-group" style="float: right">
-                        <a class="btn btn-default" href="/product/create">Add new
+                        <a class="btn btn-default" href="/products/create">Add new
                             product</a>
                     </div>
                 </div>

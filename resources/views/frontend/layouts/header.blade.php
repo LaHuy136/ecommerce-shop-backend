@@ -61,13 +61,13 @@
                     <div class="shop-menu clearfix pull-right">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="{{ url('/checkout') }}">
+                                <a href="{{ route('checkouts.index') }}">
                                     <i class="fa fa-crosshairs"></i> Checkout
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('cart.index') }}" class="nav-link position-relative">
+                                <a href="{{ route('carts.index') }}" class="nav-link position-relative">
                                     <i class="fa fa-shopping-cart"></i> Cart
 
                                     <span id="cartQty" class="badge">
@@ -146,18 +146,18 @@
                                 </a>
                                 <ul role="menu" class="sub-menu">
                                     <li>
-                                        <a href="{{ route('products.index') }}">Products</a>
+                                        <a href="{{ url('/products') }}">Products</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('checkout.index') }}">Checkout</a>
+                                        <a href="{{ route('checkouts.index') }}">Checkout</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('cart.index') }}">Cart</a>
+                                        <a href="{{ route('carts.index') }}">Cart</a>
                                     </li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="{{ route('blog.index') }}">
+                                <a href="{{ route('blogs.index') }}">
                                     Blog <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul role="menu" class="sub-menu">

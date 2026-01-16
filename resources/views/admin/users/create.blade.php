@@ -7,7 +7,7 @@
 
     <div class="container-fluid">
         <div class="signup-form">
-            <form action="/admin/user" method="POST" enctype="multipart/form-data">
+            <form action="/admin/users" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div pss="form-group">

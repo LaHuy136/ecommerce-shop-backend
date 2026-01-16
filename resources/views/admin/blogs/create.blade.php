@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form class="form-horizontal" method="POST" action="/admin/blog" enctype="multipart/form-data">
+                    <form class="form-horizontal" method="POST" action="/admin/blogs" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label id="title">Title</label>

@@ -26,7 +26,7 @@
                             <td>{{ $blog->description }}</td>
                             <td class="flex flex-col items-center">
                                 <button class="btn btn-primary"><a style="color: white"
-                                        href="/admin/blog/{{ $blog->id }}/edit">Edit</a></button>
+                                        href="/admin/blogs/{{ $blog->id }}/edit">Edit</a></button>
                             </td>
                         </tr>
                     @endforeach
@@ -36,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-5 align-self-center" style="margin-left:20px">
-            <a href="/admin/blog/create" class="btn btn-success">Create Blog</a>
+            <a href="/admin/blogs/create" class="btn btn-success">Create Blog</a>
         </div>
     </div>
 @endsection

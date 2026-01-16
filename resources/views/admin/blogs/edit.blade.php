@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form class="form-horizontal" action="/admin/blog/{{ $blog->id }}" method="POST"
+                    <form class="form-horizontal" action="/admin/blogs/{{ $blog->id }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </form>
-                    <form method="POST" action="/admin/blog/{{ $blog->id }}" id="delete-form" class="hidden">
+                    <form method="POST" action="/admin/blogs/{{ $blog->id }}" id="delete-form" class="hidden">
                         @csrf
                         @method('DELETE')
                     </form>

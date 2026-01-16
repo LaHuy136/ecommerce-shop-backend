@@ -60,9 +60,9 @@
         }
     });
 
-    window.rateUrl = "{{ route('rate.store') }}";
+    window.rateUrl = "{{ route('rates.store') }}";
     window.commentStoreUrl = "{{ route('comments.store') }}";
-    window.cartAddUrl = "{{ route('cart.store') }}";
+    window.cartAddUrl = "{{ route('carts.store') }}";
     window.filterPrice = "{{ route('products.filter.price') }}";
     window.isLoggedIn = {{ Auth::check() ? 'true' : 'false' }};
 </script>

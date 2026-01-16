@@ -43,7 +43,7 @@
             <div class="col-lg-8 col-xlg-9 col-md-7">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-horizontal form-material" action="/admin/user/{{ $user->id }}" method="POST"
+                        <form class="form-horizontal form-material" action="/admin/users/{{ $user->id }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </form>
-                        <form method="POST" action="/admin/user/{{ $user->id }}" id="delete-form" class="hidden">
+                        <form method="POST" action="/admin/users/{{ $user->id }}" id="delete-form" class="hidden">
                             @csrf
                             @method('DELETE')
                         </form>

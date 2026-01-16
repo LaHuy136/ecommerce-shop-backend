@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\Api\Admin\BlogController;
+use App\Http\Controllers\Api\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Api\Admin\CountryController;
 use App\Http\Controllers\Api\Admin\HistoryController;
-use App\Http\Controllers\Api\Admin\ProductController;
+use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Api\Admin\ProfileController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\Member\BlogController as MemberBlogController;
+use App\Http\Controllers\Api\Member\CommentController;
+use App\Http\Controllers\Api\Member\ProductController as MemberProductController;
+use App\Http\Controllers\Api\Member\RatePostController;
 use App\Http\Controllers\Api\SessionController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,57 +18,79 @@ use Illuminate\Support\Facades\Route;
 // })->middleware('auth:sanctum');
 
 // Admin
-Route::middleware(['auth:sanctum', 'apiLevel:1'])->group(function () {
-    Route::get('/histories', [HistoryController::class, 'index']);
+Route::middleware(['auth:sanctum', 'apiLevel:1'])
+    ->group(function () {
+        Route::get('/histories', [HistoryController::class, 'index']);
 
-    Route::prefix('profile')->group(function () {
-        Route::get('/', [ProfileController::class, 'index']);
-        Route::patch('/{id}', [ProfileController::class, 'update']);
-    });
+        Route::prefix('profiles')->group(function () {
+            Route::get('/', [ProfileController::class, 'index']);
+            Route::patch('/{id}', [ProfileController::class, 'update']);
+        });
 
-    // User
-    Route::prefix('users')->group(function () {
-        Route::get('/', [UserController::class, 'index']);
-        Route::get('/{id}', [UserController::class, 'show']);
-        Route::post('/', [UserController::class, 'store']);
-        Route::patch('/{id}', [UserController::class, 'update']);
-        Route::delete('/{user}', [UserController::class, 'destroy']);
-    });
+        // User
+        Route::prefix('users')->group(function () {
+            Route::get('/', [UserController::class, 'index']);
+            Route::get('/{id}', [UserController::class, 'show']);
+            Route::post('/', [UserController::class, 'store']);
+            Route::patch('/{id}', [UserController::class, 'update']);
+            Route::delete('/{user}', [UserController::class, 'destroy']);
+        });
 
-    // Countries
-    Route::prefix('countries')->group(function () {
-        Route::get('/', [CountryController::class, 'index']);
-        Route::get('/{id}', [CountryController::class, 'show']);
-        Route::post('/', [CountryController::class, 'store']);
-        Route::patch('/{id}', [CountryController::class, 'update']);
-        Route::delete('/{country}', [CountryController::class, 'destroy']);
-    });
+        // Countries
+        Route::prefix('countries')->group(function () {
+            Route::get('/', [CountryController::class, 'index']);
+            Route::get('/{id}', [CountryController::class, 'show']);
+            Route::post('/', [CountryController::class, 'store']);
+            Route::patch('/{id}', [CountryController::class, 'update']);
+            Route::delete('/{country}', [CountryController::class, 'destroy']);
+        });
 
-    // Blogs
-    Route::prefix('blogs')->group(function () {
-        Route::get('/', [BlogController::class, 'index']);
-        Route::get('/{id}', [BlogController::class, 'show']);
-        Route::post('/', [BlogController::class, 'store']);
-        Route::patch('/{id}', [BlogController::class, 'update']);
-        Route::delete('/{blog}', [BlogController::class, 'destroy']);
-    });
+        // Blogs
+        Route::prefix('blogs')->group(function () {
+            Route::get('/', [AdminBlogController::class, 'index']);
+            Route::get('/{id}', [AdminBlogController::class, 'show']);
+            Route::post('/', [AdminBlogController::class, 'store']);
+            Route::patch('/{id}', [AdminBlogController::class, 'update']);
+            Route::delete('/{blog}', [AdminBlogController::class, 'destroy']);
+        });
 
-    // Products
-    Route::prefix('products')->group(function () {
-        Route::get('/', [ProductController::class, 'index']);
-        Route::get('/{id}', [ProductController::class, 'show']);
-        Route::post('/', [ProductController::class, 'store']);
-        Route::patch('/{id}', [ProductController::class, 'update']);
-        Route::delete('/{product}', [ProductController::class, 'destroy']);
+        // Products
+        Route::prefix('products')->group(function () {
+            Route::get('/', [AdminProductController::class, 'index']);
+            Route::get('/{id}', [AdminProductController::class, 'show']);
+            Route::post('/', [AdminProductController::class, 'store']);
+            Route::patch('/{id}', [AdminProductController::class, 'update']);
+            Route::delete('/{id}', [AdminProductController::class, 'destroy']);
+        });
     });
-});
 
 // Member
-Route::middleware(['auth:sanctum', 'apiLevel:0'])->group(function () {
-    // Route::get('/products', [ProductController::class, 'index']);
+Route::middleware(['auth:sanctum', 'apiLevel:0'])
+    ->group(function () {
+        // Account
+        Route::get('/accounts', [SessionController::class, 'index']);
+        Route::patch('/accounts/{id}', [SessionController::class, 'update']);
 
-    Route::get('/account', [SessionController::class, 'index']);
-    Route::patch('/account/{id}', [SessionController::class, 'update']);
+        Route::prefix('products')->group(function () {
+            Route::get("/", [MemberProductController::class, 'index']);
+            // Route::get("/{id}", [MemberProductController::class, 'show']);
+            Route::post("/", [MemberProductController::class, 'store']);
+            Route::patch("/{id}", [MemberProductController::class, 'update']);
+            Route::delete("/{id}", [MemberProductController::class, 'destroy']);
+        });
+
+        // Comment Blog
+        Route::post('/comments', [CommentController::class, 'store']);
+
+        // Rating Blog
+        Route::post('/rates', [RatePostController::class, 'store']);
+    });
+
+// Blogs
+Route::prefix('blogs')->group(function () {
+    Route::get("/", [MemberBlogController::class, 'index']);
+    Route::get('/{blog}/comments', [CommentController::class, 'index']);
+    Route::get("/{id}", [MemberBlogController::class, 'show']);
 });
 
 // Register & Login

@@ -44,7 +44,7 @@ Route::prefix('admin')
         Route::patch('/profile/{id}', [ProfileController::class, 'update']);
 
         // Country
-        Route::prefix('country')->group(function () {
+        Route::prefix('countries')->group(function () {
             Route::get('/', [CountryController::class, 'index'])
                 ->name('admin.countries');
             Route::get('/create', [CountryController::class, 'create']);
@@ -55,7 +55,7 @@ Route::prefix('admin')
         });
 
         // Blog
-        Route::prefix('blog')->group(function () {
+        Route::prefix('blogs')->group(function () {
             Route::get('/', [AdminBlogController::class, 'index'])
                 ->name('admin.blogs');
             Route::get('/create', [AdminBlogController::class, 'create']);
@@ -66,7 +66,7 @@ Route::prefix('admin')
         });
 
         // User
-        Route::prefix('user')->group(function () {
+        Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])
                 ->name('admin.users');
             Route::get('/create', [UserController::class, 'create']);
@@ -78,7 +78,7 @@ Route::prefix('admin')
         });
 
         // Product
-        Route::prefix('product')->group(function () {
+        Route::prefix('products')->group(function () {
             Route::get('/', [AdminProductController::class, 'index'])
                 ->name('admin.products');
             Route::get('/search', [SearchController::class, 'searchByMemberName']);
@@ -91,11 +91,11 @@ Route::prefix('admin')
         });
 
         // History
-        Route::get('/history', [HistoryController::class, 'index']);
+        Route::get('/histories', [HistoryController::class, 'index']);
     });
 
 // User
-Route::middleware(['auth', 'level: 0'])
+Route::middleware(['auth', 'level:0'])
     ->group(function () {
 
         // Account
@@ -104,22 +104,24 @@ Route::middleware(['auth', 'level: 0'])
         Route::patch("/account/{id}", [SessionController::class, 'update']);
 
         // Rating blog
-        Route::post('/rate', [RateController::class, 'store'])
-            ->name('rate.store');
+        Route::post('/rates', [RateController::class, 'store'])
+            ->name('rates.store');
 
         // Comment blog
         Route::post('/comments', [CommentController::class, 'store'])
             ->name('comments.store');
 
         // Product
-        Route::get("/product", [MemberProductController::class, 'index'])
-            ->name('products.index');
-        Route::get("/product/create", [MemberProductController::class, 'create']);
-        Route::post("/product", [MemberProductController::class, 'store']);
+        Route::prefix('products')->group(function () {
+            Route::get("/", [MemberProductController::class, 'index'])
+                ->name('products.index');
+            Route::get("/create", [MemberProductController::class, 'create']);
+            Route::post("/", [MemberProductController::class, 'store']);
 
-        Route::get("/product/{product}/edit", [MemberProductController::class, 'edit']);
-        Route::patch("/product/{product}", [MemberProductController::class, 'update']);
-        Route::delete("/product/{product}", [MemberProductController::class, 'destroy']);
+            Route::get("/{product}/edit", [MemberProductController::class, 'edit']);
+            Route::patch("/product/{product}", [MemberProductController::class, 'update']);
+            Route::delete("/product/{product}", [MemberProductController::class, 'destroy']);
+        });
 
         // Error
         Route::get("/404", function () {
@@ -153,34 +155,41 @@ Route::get("/", [SessionController::class, 'index'])
     ->name('member.dashboard');
 
 // Blog
-Route::get("/blog", [MemberBlogController::class, 'index'])
-    ->name('blog.index');
-Route::get('/blog/{blog}/comments', [CommentController::class, 'index']);
-Route::get("/blog/{blog:slug}", [MemberBlogController::class, 'show'])
-    ->name('blogs.show');
+Route::prefix('blogs')->group(function () {
+    Route::get("/", [MemberBlogController::class, 'index'])
+        ->name('blogs.index');
+    Route::get('/{blog}/comments', [CommentController::class, 'index']);
+    Route::get("/{blog:slug}", [MemberBlogController::class, 'show'])
+        ->name('blogs.show');
+});
 
 // Product
-Route::get('/product/search', [SearchController::class, 'searchByProductName'])
-    ->name('products.search');
-Route::post('/product/search', [SearchController::class, 'search'])
-    ->name('products.search.advanced');
-Route::post('/products/filter-price', [MemberProductController::class, 'filterPrice'])
-    ->name('products.filter.price');
-Route::get("/product/home", [MemberProductController::class, 'home'])
-    ->name('products.home');
-Route::get("/product/{product}", [MemberProductController::class, 'show']);
+Route::prefix('products')->group(function () {
+    Route::get('/search', [SearchController::class, 'searchByProductName'])
+        ->name('products.search');
+    Route::post('/search', [SearchController::class, 'search'])
+        ->name('products.search.advanced');
+    Route::post('/filter-price', [MemberProductController::class, 'filterPrice'])
+        ->name('products.filter.price');
+    Route::get("/home", [MemberProductController::class, 'home'])
+        ->name('products.home');
+    Route::get("/{product}", [MemberProductController::class, 'show'])
+        ->name('products.show');
+});
 
 // Cart
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart.index');
-Route::post("/cart", [CartController::class, 'store'])
-    ->name('cart.store');
-Route::post("/cart/{cart}", [CartController::class, 'update']);
+Route::prefix('carts')->group(function () {
+    Route::get('/', [CartController::class, 'index'])
+        ->name('carts.index');
+    Route::post("/", [CartController::class, 'store'])
+        ->name('carts.store');
+    Route::post("/{cart}", [CartController::class, 'update']);
+});
 
 // Checkout
-Route::get("/checkout", [CheckoutController::class, 'index'])
-    ->name('checkout.index');
-Route::post('/checkout/sendmail', [CheckoutController::class, 'store']);
+Route::get("/checkouts", [CheckoutController::class, 'index'])
+    ->name('checkouts.index');
+Route::post('/checkouts/sendmail', [CheckoutController::class, 'store']);
 
 // Contact
 Route::get("/contact-us", function () {

@@ -22,7 +22,7 @@
                             <th scope="row">{{ $country->id }}</th>
                             <td>{{ $country->name }}</td>
                             <td class="flex flex-col items-center">
-                                <a href="/admin/country/{{ $country->id }}/edit" class="btn btn-primary">Edit</a>
+                                <a href="/admin/countries/{{ $country->id }}/edit" class="btn btn-primary">Edit</a>
                             </td>
                         </tr>
                     @endforeach
@@ -35,7 +35,7 @@
     </div>
     <div class="row">
         <div class="col-5 align-self-center" style="margin-left:20px">
-            <a href="/admin/country/create" class="btn btn-success">Create Country</a>
+            <a href="/admin/countries/create" class="btn btn-success">Create Country</a>
         </div>
     </div>
 @endsection

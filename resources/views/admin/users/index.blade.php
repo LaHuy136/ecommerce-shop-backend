@@ -24,7 +24,7 @@
                             @if ($user->level == 0)
                                 <th scope="row">{{ $user->id }}</th>
                                 <td>
-                                    <a href="/admin/user/{{ $user->id }}">
+                                    <a href="/admin/users/{{ $user->id }}">
                                         {{ $user->name }}
                                     </a>
                                 </td>
@@ -37,7 +37,7 @@
                                 <td>Member</td>
                                 <td class="flex flex-col items-center">
                                     <button class="btn btn-primary"><a style="color: white"
-                                            href="/admin/user/{{ $user->id }}/edit">Edit</a></button>
+                                            href="/admin/users/{{ $user->id }}/edit">Edit</a></button>
                                 </td>
                             @endif
                         </tr>
@@ -48,7 +48,7 @@
     </div>
     <div class="row">
         <div class="col-5 align-self-center" style="margin-left:20px">
-            <a href="/admin/user/create" class="btn btn-success">Create User</a>
+            <a href="/admin/users/create" class="btn btn-success">Create User</a>
         </div>
     </div>
 @endsection

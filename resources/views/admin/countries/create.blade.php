@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="card card-body">
-                    <form class="form-horizontal m-t-30" method="POST" action="/admin/country">
+                    <form class="form-horizontal m-t-30" method="POST" action="/admin/countries">
                         @csrf
                         <div class="form-group">
                             <label id="name">Country</label>

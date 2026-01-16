@@ -17,7 +17,7 @@
                          <i class="fa fa-shopping-cart"></i> Add to cart</a>
                  </div>
 
-                 <a href="/product/{{ $product->id }}">
+                 <a href="{{ route('products.show', $product->id) }}">
                      <div class="product-overlay">
                          <div class="overlay-content">
                              <h2>$ {{ $product->price }}</h2>
