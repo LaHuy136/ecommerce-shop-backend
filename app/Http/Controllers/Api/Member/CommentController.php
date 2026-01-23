@@ -26,7 +26,7 @@ class CommentController extends Controller
                     'parent_id' => $comment->parent_id,
                     'user_name' => $comment->user->name,
                     'user_avatar' => $comment->user->avatar
-                        ? asset($comment->user->avatar)
+                        ? asset('storage/' . $comment->user->avatar)
                         : null,
                     'content' => $comment->content,
                     'created_at_time' => $comment->created_at->format('h:i A'),

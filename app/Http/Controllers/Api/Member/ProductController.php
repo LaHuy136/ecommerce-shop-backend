@@ -145,6 +145,25 @@ class ProductController extends Controller
     {
         $product = Product::findorFail($id);
 
+        return response()->json(
+            [
+                'status' => 200,
+                'product' => $product->load('images'),
+                'categories' => Category::all(),
+                'brands' => Brand::withCount('products')
+                    ->get('name')
+            ],
+            200
+        );
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $product = Product::findorFail($id);
+
         if ($product->user_id !== Auth::user()->id) {
             abort(403, 'Unauthorized');
         }
@@ -153,14 +172,6 @@ class ProductController extends Controller
             'status' => 200,
             'data' => $product->load('images'),
         ], 200);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**

@@ -67,21 +67,23 @@ Route::middleware(['auth:sanctum', 'apiLevel:1'])
 
 // Member
 Route::middleware(['auth:sanctum', 'apiLevel:0'])
+    ->prefix('user')
     ->group(function () {
         // Account
-        Route::get('/accounts', [SessionController::class, 'index']);
-        Route::patch('/accounts/{id}', [SessionController::class, 'update']);
+        Route::get('/', [SessionController::class, 'index']);
+        Route::patch('/update/{id}', [SessionController::class, 'update']);
 
-        Route::prefix('products')->group(function () {
-            Route::get("/", [MemberProductController::class, 'index']);
-            // Route::get("/{id}", [MemberProductController::class, 'show']);
-            Route::post("/", [MemberProductController::class, 'store']);
-            Route::patch("/{id}", [MemberProductController::class, 'update']);
-            Route::delete("/{id}", [MemberProductController::class, 'destroy']);
+        Route::get("/my-product", [MemberProductController::class, 'index']);
+        Route::prefix('product')->group(function () {
+            Route::get("/{id}", [MemberProductController::class, 'edit']);
+            Route::delete("/wishlist", [MemberProductController::class, 'wishlist']);
+            Route::post("/add", [MemberProductController::class, 'store']);
+            Route::patch("/update/{id}", [MemberProductController::class, 'update']);
+            Route::delete("/delete/{id}", [MemberProductController::class, 'destroy']);
         });
 
         // Comment Blog
-        Route::post('/comments', [CommentController::class, 'store']);
+        Route::post('/blog/comment', [CommentController::class, 'store']);
 
         // Rating Blog
         Route::post('/rates', [RatePostController::class, 'store']);
@@ -98,8 +100,9 @@ Route::prefix('blogs')->group(function () {
 Route::get("/countries", [ApiCountryController::class, 'index']);
 
 // Products
-Route::get("/home", [MemberProductController::class, 'home']);
-Route::get("/shop", [MemberProductController::class, 'shop']);
+Route::get("/product", [MemberProductController::class, 'home']);
+Route::get("/product/list", [MemberProductController::class, 'shop']);
+Route::get("/product/detail/{id}", [MemberProductController::class, 'show']);
 
 // Register & Login
 Route::post('/login', [SessionController::class, 'login']);

@@ -18,31 +18,41 @@ class SessionController extends Controller
 {
     public function register(MemberRegisterMemberRequest $request)
     {
-        $data = $request->validated();
-        $data['level'] = 0;
-        $data['email_verified_at'] = now();
-        $data['remember_token'] = Str::random(10);
+        try {
+            $data = $request->validated();
+            $data['level'] = 0;
+            $data['email_verified_at'] = now();
+            $data['remember_token'] = Str::random(10);
 
-        if ($request->hasFile('avatar')) {
-            $data['avatar'] = $request
-                ->file('avatar')
-                ->store('avatars/members', 'public');
+            if ($request->hasFile('avatar')) {
+                $data['avatar'] = $request
+                    ->file('avatar')
+                    ->store('avatars/members', 'public');
+            }
+
+            $user = User::create($data);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Register successfully',
+                'user' => $user
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Register failed',
+                'errors' => [
+                    'general' => $e->getMessage()
+                ]
+            ], 500);
         }
-
-        $user = User::create($data);
-
-        return response()->json([
-            'status' => 'sucess',
-            'message' => 'Register successfully',
-            'user' => $user
-        ], 200);
     }
 
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
-
         $remember = $request->filled('remember_me');
+
 
         if (!Auth::attempt($data, $remember)) {
             return response()->json(
@@ -52,13 +62,14 @@ class SessionController extends Controller
                         'error' => 'Invalid email or password'
                     ]
                 ],
-                404
+                401
             );
         }
 
         return response()->json(
             [
                 'status' => 'success',
+                'message' => 'Login successfully',
                 'token' => Auth::user()->createToken('authToken')->plainTextToken,
                 'user' => Auth::user()
             ],
