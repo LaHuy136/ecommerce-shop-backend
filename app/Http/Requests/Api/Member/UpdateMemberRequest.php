@@ -42,7 +42,7 @@ class UpdateMemberRequest extends FormRequest
                 'mimes:jpeg,png,jpg,gif',
                 'max:2048'
             ],
-            'country_id' => ['nullable', 'exists:countries,id'],
+            'country_id' => ['required', 'exists:countries,id'],
         ];
     }
 }

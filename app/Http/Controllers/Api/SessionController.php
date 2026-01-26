@@ -153,6 +153,7 @@ class SessionController extends Controller
         $user = User::findOrFail($id);
         $data = $request->validated();
 
+
         if (empty($data['password'])) {
             unset($data['password']);
         }
@@ -166,12 +167,11 @@ class SessionController extends Controller
                 ->store('avatars/members', 'public');
         }
 
-        $user->update($data);
-
         return response()->json([
             'status' => 'success',
             'message' => 'Update profile successfully',
-            'data' => $user
+            'token' => $user->createToken('authToken')->plainTextToken,
+            'user' => $user
         ], 200);
     }
 }

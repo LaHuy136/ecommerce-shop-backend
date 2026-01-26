@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\Admin\HistoryController;
 use App\Http\Controllers\Api\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Api\Admin\ProfileController;
 use App\Http\Controllers\Api\Admin\UserController;
+use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CountryController as ApiCountryController;
 use App\Http\Controllers\Api\Member\BlogController as MemberBlogController;
 use App\Http\Controllers\Api\Member\CommentController;
@@ -73,9 +75,9 @@ Route::middleware(['auth:sanctum', 'apiLevel:0'])
         Route::get('/', [SessionController::class, 'index']);
         Route::patch('/update/{id}', [SessionController::class, 'update']);
 
-        Route::get("/my-product", [MemberProductController::class, 'index']);
         Route::prefix('product')->group(function () {
-            Route::get("/{id}", [MemberProductController::class, 'edit']);
+            Route::get("/list", [MemberProductController::class, 'index']);
+            Route::get("/{id}/edit", [MemberProductController::class, 'edit']);
             Route::delete("/wishlist", [MemberProductController::class, 'wishlist']);
             Route::post("/add", [MemberProductController::class, 'store']);
             Route::patch("/update/{id}", [MemberProductController::class, 'update']);
@@ -86,18 +88,21 @@ Route::middleware(['auth:sanctum', 'apiLevel:0'])
         Route::post('/blog/comment', [CommentController::class, 'store']);
 
         // Rating Blog
-        Route::post('/rates', [RatePostController::class, 'store']);
+        Route::post('/blog/rate', [RatePostController::class, 'store']);
     });
 
 // Blogs
-Route::prefix('blogs')->group(function () {
+Route::prefix('blog')->group(function () {
     Route::get("/", [MemberBlogController::class, 'index']);
     Route::get('/{blog}/comments', [CommentController::class, 'index']);
-    Route::get("/{id}", [MemberBlogController::class, 'show']);
+    Route::get('/rate', [RatePostController::class, 'index']);
+    Route::get("/detail/{id}", [MemberBlogController::class, 'show']);
 });
 
 //Countries
 Route::get("/countries", [ApiCountryController::class, 'index']);
+Route::get("/categories", [CategoryController::class, 'index']);
+Route::get("/brands", [BrandController::class, 'index']);
 
 // Products
 Route::get("/product", [MemberProductController::class, 'home']);

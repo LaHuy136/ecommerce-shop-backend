@@ -62,7 +62,8 @@ class ProductController extends Controller
     {
         return response()->json([
             'status' => 200,
-            'data' =>  Product::orderBy('id', 'asc')
+            'products' =>  Product::orderBy('id', 'asc')
+                ->with('images')
                 ->whereIn('user_id', [Auth::user()->id])
                 ->paginate(5)
         ], 200);
@@ -170,7 +171,7 @@ class ProductController extends Controller
 
         return response()->json([
             'status' => 200,
-            'data' => $product->load('images'),
+            'product' => $product->load('images'),
         ], 200);
     }
 
@@ -202,12 +203,10 @@ class ProductController extends Controller
             : 0;
 
         if ($oldImageCount - $deleteImageCount + $newImageCount > 3) {
-            return redirect()
-                ->back()
-                ->withErrors([
-                    'images' => 'You can upload a maximum of 3 images per product.'
-                ])
-                ->withInput();
+            return response()->json([
+                'status' => 500,
+                'images' => 'You can upload a maximum of 3 images per product.'
+            ]);
         }
 
         if ($request->filled('delete_images')) {

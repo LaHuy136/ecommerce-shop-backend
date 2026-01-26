@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Member;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Rate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,10 @@ class RatePostController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json([
+            'status' => 200,
+            'data' => Rate::all()
+        ], 200);
     }
 
     /**
@@ -35,19 +39,31 @@ class RatePostController extends Controller
             'rating' => ['required', 'integer', 'min:1', 'max:5'],
         ]);
 
-        Rate::updateOrCreate(
-            [
-                'user_id' => Auth::user()->id,
-                'blog_id' => $request->blog_id,
-            ],
-            [
-                'rating' => $request->rating,
-            ]
-        );
+        $exists = Rate::where('user_id', Auth::id())
+            ->where('blog_id', $request->blog_id)
+            ->exists();
+
+        if ($exists) {
+            return response()->json([
+                'message' => 'You rated this post',
+            ], 409);
+        }
+
+        Rate::create([
+            'user_id' => Auth::id(),
+            'blog_id' => $request->blog_id,
+            'rating' => $request->rating,
+        ]);
+
+        $blog = Blog::withAvg('rates', 'rating')
+            ->withCount('rates')
+            ->find($request->blog_id, 'id');
 
         return response()->json([
             'status' => 200,
             'message' => 'Rating post successfully',
+            'avg' => $blog->rates_avg_rating,
+            'count' => $blog->rates_count
         ], 200);
     }
 
