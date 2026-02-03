@@ -16,56 +16,52 @@ use App\Http\Controllers\Api\Member\RatePostController;
 use App\Http\Controllers\Api\SessionController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
-
 // Admin
-Route::middleware(['auth:sanctum', 'apiLevel:1'])
-    ->group(function () {
-        Route::get('/histories', [HistoryController::class, 'index']);
+// Route::middleware(['auth:sanctum', 'apiLevel:1'])
+//     ->group(function () {
+//         Route::get('/histories', [HistoryController::class, 'index']);
 
-        Route::prefix('profiles')->group(function () {
-            Route::get('/', [ProfileController::class, 'index']);
-            Route::patch('/{id}', [ProfileController::class, 'update']);
-        });
+//         Route::prefix('profiles')->group(function () {
+//             Route::get('/', [ProfileController::class, 'index']);
+//             Route::patch('/{id}', [ProfileController::class, 'update']);
+//         });
 
-        // User
-        Route::prefix('users')->group(function () {
-            Route::get('/', [UserController::class, 'index']);
-            Route::get('/{id}', [UserController::class, 'show']);
-            Route::post('/', [UserController::class, 'store']);
-            Route::patch('/{id}', [UserController::class, 'update']);
-            Route::delete('/{user}', [UserController::class, 'destroy']);
-        });
+//         // User
+//         Route::prefix('users')->group(function () {
+//             Route::get('/', [UserController::class, 'index']);
+//             Route::get('/{id}', [UserController::class, 'show']);
+//             Route::post('/', [UserController::class, 'store']);
+//             Route::patch('/{id}', [UserController::class, 'update']);
+//             Route::delete('/{user}', [UserController::class, 'destroy']);
+//         });
 
-        // Countries
-        Route::prefix('countries')->group(function () {
-            Route::get('/', [CountryController::class, 'index']);
-            Route::get('/{id}', [CountryController::class, 'show']);
-            Route::post('/', [CountryController::class, 'store']);
-            Route::patch('/{id}', [CountryController::class, 'update']);
-            Route::delete('/{country}', [CountryController::class, 'destroy']);
-        });
+//         // Countries
+//         Route::prefix('countries')->group(function () {
+//             Route::get('/', [CountryController::class, 'index']);
+//             Route::get('/{id}', [CountryController::class, 'show']);
+//             Route::post('/', [CountryController::class, 'store']);
+//             Route::patch('/{id}', [CountryController::class, 'update']);
+//             Route::delete('/{country}', [CountryController::class, 'destroy']);
+//         });
 
-        // Blogs
-        Route::prefix('blogs')->group(function () {
-            Route::get('/', [AdminBlogController::class, 'index']);
-            Route::get('/{id}', [AdminBlogController::class, 'show']);
-            Route::post('/', [AdminBlogController::class, 'store']);
-            Route::patch('/{id}', [AdminBlogController::class, 'update']);
-            Route::delete('/{blog}', [AdminBlogController::class, 'destroy']);
-        });
+//         // Blogs
+//         Route::prefix('blogs')->group(function () {
+//             Route::get('/', [AdminBlogController::class, 'index']);
+//             Route::get('/{id}', [AdminBlogController::class, 'show']);
+//             Route::post('/', [AdminBlogController::class, 'store']);
+//             Route::patch('/{id}', [AdminBlogController::class, 'update']);
+//             Route::delete('/{blog}', [AdminBlogController::class, 'destroy']);
+//         });
 
-        // Products
-        Route::prefix('products')->group(function () {
-            Route::get('/', [AdminProductController::class, 'index']);
-            Route::get('/{id}', [AdminProductController::class, 'show']);
-            Route::post('/', [AdminProductController::class, 'store']);
-            Route::patch('/{id}', [AdminProductController::class, 'update']);
-            Route::delete('/{id}', [AdminProductController::class, 'destroy']);
-        });
-    });
+//         // Products
+//         Route::prefix('products')->group(function () {
+//             Route::get('/', [AdminProductController::class, 'index']);
+//             Route::get('/{id}', [AdminProductController::class, 'show']);
+//             Route::post('/', [AdminProductController::class, 'store']);
+//             Route::patch('/{id}', [AdminProductController::class, 'update']);
+//             Route::delete('/{id}', [AdminProductController::class, 'destroy']);
+//         });
+//     });
 
 // Member
 Route::middleware(['auth:sanctum', 'apiLevel:0'])
@@ -108,6 +104,7 @@ Route::get("/brands", [BrandController::class, 'index']);
 Route::get("/product", [MemberProductController::class, 'home']);
 Route::get("/product/list", [MemberProductController::class, 'shop']);
 Route::get("/product/detail/{id}", [MemberProductController::class, 'show']);
+Route::post("/products", [MemberProductController::class, 'getProducts']);
 
 // Register & Login
 Route::post('/login', [SessionController::class, 'login']);

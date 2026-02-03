@@ -149,7 +149,7 @@ class ProductController extends Controller
         return response()->json(
             [
                 'status' => 200,
-                'product' => $product->load('images'),
+                'product' => $product->load(['images', 'category', 'brand']),
                 'categories' => Category::all(),
                 'brands' => Brand::withCount('products')
                     ->get('name')
@@ -266,5 +266,28 @@ class ProductController extends Controller
             'status' => 200,
             'message' => 'Product deleted successfully'
         ], 200);
+    }
+
+    public function getProducts(Request $request)
+    {
+        $items = $request->items;
+
+        $productIds = collect($items)->pluck("product_id");
+
+        $products = Product::whereIn("id", $productIds)
+            ->get();
+
+        $products = $products->map(function ($product) use ($items) {
+            $item = collect($items)
+                ->firstWhere("product_id", $product->id);
+            $product->quantity = $item['quantity'];
+            $product->subtotal = $product->price * $product->quantity;
+            return $product;
+        });
+
+        return response()->json([
+            'products' => $products->load('images'),
+            'total' => $products->sum('subtotal')
+        ]);
     }
 }
