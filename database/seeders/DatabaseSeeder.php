@@ -41,13 +41,13 @@ class DatabaseSeeder extends Seeder
             'level' => 0
         ]);
 
-        $products = Product::factory(20)->create();
+        // $products = Product::factory(20)->create();
 
-        $products->each(function ($product) {
-            ProductImage::factory(rand(3, 5))->create([
-                'product_id' => $product->id,
-            ]);
-        });
+        // $products->each(function ($product) {
+        //     ProductImage::factory(rand(3, 5))->create([
+        //         'product_id' => $product->id,
+        //     ]);
+        // });
 
         Blog::factory(10)->create([
             'user_id' => $admin->id

@@ -150,6 +150,7 @@ class SessionController extends Controller
      */
     public function update(UpdateMemberRequest $request, string $id)
     {
+        // dd($request->all());
         $user = User::findOrFail($id);
         $data = $request->validated();
 
@@ -166,6 +167,8 @@ class SessionController extends Controller
                 ->file('avatar')
                 ->store('avatars/members', 'public');
         }
+
+        $user->update($data);
 
         return response()->json([
             'status' => 'success',
