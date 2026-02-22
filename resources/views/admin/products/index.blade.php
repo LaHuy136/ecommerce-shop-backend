@@ -37,7 +37,7 @@
                             <tr>
                                 <th scope="row">{{ $product->id }}</th>
                                 <td>
-                                    <a href="/admin/product/{{ $product->id }}">
+                                    <a href="/admin/products/{{ $product->id }}">
                                         {{ $product->name }}
                                     </a>
                                 </td>
@@ -59,9 +59,9 @@
                 {{ $products->links('pagination::bootstrap-4') }}
             </div>
         </div>
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-5 align-self-center" style="margin-left:20px">
                 <a href="/admin/products/create" class="btn btn-success">Create Product</a>
             </div>
-        </div>
+        </div> --}}
     @endsection

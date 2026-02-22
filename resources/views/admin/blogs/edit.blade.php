@@ -43,7 +43,7 @@
                             <div class="col-sm-12">
                                 <button class="btn btn-success" style="margin-right: 10px;">Update Blog</button>
                                 <button class="btn btn-danger" form="delete-form">Delete Blog</button>
-                                <a href="/admin/blog" class="btn btn-danger float-right">Cancel</a>
+                                <a href="{{ route('admin.blogs') }}" class="btn btn-danger float-right">Cancel</a>
                             </div>
                         </div>
                     </form>

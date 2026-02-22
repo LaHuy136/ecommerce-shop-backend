@@ -22,7 +22,6 @@ class ProductController extends Controller
     {
         return view('admin.products.index', [
             'products' => Product::with(['category', 'brand', 'images'])
-                ->latest()
                 ->orderBy('id')
                 ->paginate(10)
         ]);

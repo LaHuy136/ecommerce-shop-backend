@@ -83,6 +83,12 @@
                             <label for="description">Description</label>
                             <textarea rows="5" name="description" class="form-control form-control-line" readonly>{{ $product->description }}</textarea>
                         </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <a href="{{ route('admin.products') }}" class="btn btn-danger float-right">Cancel</a>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

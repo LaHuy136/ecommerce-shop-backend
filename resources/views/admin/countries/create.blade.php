@@ -10,7 +10,7 @@
                         @csrf
                         <div class="form-group">
                             <label id="name">Country</label>
-                            <input type="text" class="form-control" placeholder="Vietnam" name="name">
+                            <input type="text" class="form-control" placeholder="Country Name" name="name">
                         </div>
 
                         <div class="form-group">
