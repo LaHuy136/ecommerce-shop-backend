@@ -53,7 +53,7 @@
                  </li>
 
                  <li class="sidebar-item">
-                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/history"
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.histories') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-history"></i>
                          <span class="hide-menu">Order History</span>

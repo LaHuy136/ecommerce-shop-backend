@@ -131,7 +131,7 @@
                                             <li>Total <span id="total">{{ $total }}</span></li>
                                         </ul>
                                         <a class="btn btn-default update" href="">Update</a>
-                                        <a class="btn btn-default check_out" href="{{ url('/checkout') }}">Check Out</a>
+                                        <a class="btn btn-default check_out" href="{{ route('checkouts.index') }}">Check Out</a>
                                     </div>
                                 </div>
                             </div>

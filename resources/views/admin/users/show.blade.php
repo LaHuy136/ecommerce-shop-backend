@@ -76,6 +76,12 @@
                                         value="{{ $user->country->name }}" readonly>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <a href="{{ route('admin.users') }}" class="btn btn-danger float-right">Cancel</a>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="name">Full Name</label>
-                        <input type="text" placeholder="Johnathan Doe" name="name"
+                        <input type="text" placeholder="Johnathan Doe" name="name" value="{{ old('name') }}"
                             class="form-control form-control-line">
 
                     </div>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line"
-                            name="email" id="email">
+                            name="email" value="{{ old('email') }}" id="email">
 
                     </div>
 
@@ -43,7 +43,7 @@
 
                     <div class="form-group">
                         <label for="phone">Phone No</label>
-                        <input type="text" name="phone" placeholder="+84 363203112"
+                        <input type="text" name="phone" value="{{ old('phone') }}" placeholder="+84 363203112"
                             class="form-control form-control-line">
 
                     </div>
@@ -58,7 +58,8 @@
                         <select class="form-control form-control-line" name="country_id">
                             @if (is_iterable($countries))
                                 @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">
+                                    <option value="{{ $country->id }}"
+                                        {{ old('country_id') == $country->id ? 'selected' : '' }}>
                                         {{ $country->name }}
                                     </option>
                                 @endforeach

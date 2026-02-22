@@ -39,7 +39,8 @@
             @foreach ($cart as $item)
                 <tr>
                     <td>
-                        <img src="{{ asset('storage/products/85x84/' . $item['image']) }}" width="60">
+                        <img src="http://ecommerce-shop-backend.test/storage/products/85x84/" . {{ $item['image'] }}
+                            width="60">
                     </td>
                     <td>{{ $item['name'] }}</td>
                     <td>${{ number_format($item['price'], 2) }}</td>

@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     function updateCartQuantity(cartId, action, tr) {
         $.ajax({
-            url: `cart/${cartId}`,
+            url: `carts/${cartId}`,
             method: "POST",
             data: { action },
             success: function (res) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
                 tr.find(".cart_total_price").text(res.itemTotal);
                 $("#cartQty").text(res.totalQty);
                 $("#total").text(res.total);
-                console.log(res.message);
+                // console.log(res.message);
                 if (res.message === "Quantity cannot be less than 1") {
                     alert(res.message);
                 }

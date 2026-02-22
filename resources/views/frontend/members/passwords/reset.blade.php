@@ -18,7 +18,13 @@
                 <form method="POST" action="{{ route('password.update') }}">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
-                    <input type="hidden" name="email" value="{{ $email }}">
+                    {{-- <input type="hidden" name="email" value="{{ $email }}"> --}}
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" value="{{ $email }}" required readonly class="form-control form-control-line"
+                            name="email" id="email">
+                    </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>

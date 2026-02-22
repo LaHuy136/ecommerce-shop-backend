@@ -82,16 +82,17 @@ Route::prefix('admin')
             Route::get('/', [AdminProductController::class, 'index'])
                 ->name('admin.products');
             Route::get('/search', [SearchController::class, 'searchByMemberName']);
-            Route::get('/create', [AdminProductController::class, 'create']);
+            // Route::get('/create', [AdminProductController::class, 'create']);
             Route::get('/{product}', [AdminProductController::class, 'show']);
-            Route::post('/', [AdminProductController::class, 'store']);
+            // Route::post('/', [AdminProductController::class, 'store']);
             Route::get('/{product}/edit', [AdminProductController::class, 'edit']);
             Route::patch('/{product}', [AdminProductController::class, 'update']);
             Route::delete('/{product}', [AdminProductController::class, 'destroy']);
         });
 
         // History
-        Route::get('/histories', [HistoryController::class, 'index']);
+        Route::get('/histories', [HistoryController::class, 'index'])
+            ->name('admin.histories');
     });
 
 // User
