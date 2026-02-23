@@ -29,6 +29,14 @@
                  </li>
 
                  <li class="sidebar-item">
+                     <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.categories') }}"
+                         aria-expanded="false">
+                         <i class="mdi mdi-view-list"></i>
+                         <span class="hide-menu">Category</span>
+                     </a>
+                 </li>
+
+                 <li class="sidebar-item">
                      <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.blogs') }}"
                          aria-expanded="false">
                          <i class="mdi mdi-newspaper"></i>
