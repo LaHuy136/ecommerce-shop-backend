@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CountryController;
@@ -52,6 +53,17 @@ Route::prefix('admin')
             Route::get('/{country}/edit', [CountryController::class, 'edit']);
             Route::patch('/{country}', [CountryController::class, 'update']);
             Route::delete('/{country}', [CountryController::class, 'destroy']);
+        });
+
+        // Category
+        Route::prefix('categories')->group(function () {
+            Route::get('/', [CategoryController::class, 'index'])
+                ->name('admin.categories');
+            Route::get('/create', [CategoryController::class, 'create']);
+            Route::post('/', [CategoryController::class, 'store']);
+            Route::get('/{category}/edit', [CategoryController::class, 'edit']);
+            Route::patch('/{category}', [CategoryController::class, 'update']);
+            Route::delete('/{category}', [CategoryController::class, 'destroy']);
         });
 
         // Blog
