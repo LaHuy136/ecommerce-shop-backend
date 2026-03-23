@@ -178,9 +178,9 @@ Route::prefix('blogs')->group(function () {
 
 // Product
 Route::prefix('products')->group(function () {
-    Route::get('/search', [SearchController::class, 'searchByProductName'])
+    Route::get('/q', [SearchController::class, 'searchByProductName'])
         ->name('products.search');
-    Route::post('/search', [SearchController::class, 'search'])
+    Route::get('/search', [SearchController::class, 'search'])
         ->name('products.search.advanced');
     Route::post('/filter-price', [MemberProductController::class, 'filterPrice'])
         ->name('products.filter.price');

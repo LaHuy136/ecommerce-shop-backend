@@ -19,7 +19,8 @@ class SearchController extends Controller
             $products = Product::query()
                 ->with(['category', 'brand', 'images'])
                 ->where('name', 'LIKE', '%' . $request->name . '%')
-                ->paginate(6);
+                ->paginate(6)
+                ->withQueryString();
         }
 
         return view('frontend.products.home', [
@@ -57,21 +58,23 @@ class SearchController extends Controller
                         [60, 200]
                     );
                     break;
+
+                case '200-999999':
+                    $query->where('price', '>', 200);
+                    break;
             }
         }
 
         if ($request->filled('category')) {
-            $query->where(
-                'category_id',
-                $request->category
-            );
+            $query->whereHas('category', function ($q) use ($request) {
+                $q->where('name', $request->category);
+            });
         }
 
         if ($request->filled('brand')) {
-            $query->where(
-                'brand_id',
-                $request->brand
-            );
+            $query->whereHas('brand', function ($q) use ($request) {
+                $q->where('name', $request->brand);
+            });
         }
 
         $products = $query
@@ -95,7 +98,8 @@ class SearchController extends Controller
             ->join('users', 'products.user_id', '=', 'users.id')
             ->where('users.name', 'LIKE', '%' . $request->memberName . '%')
             ->select('products.*')
-            ->paginate(6);
+            ->paginate(6)
+            ->withQueryString();
 
         return view('admin.products.searchResult', [
             'products' => $products,
