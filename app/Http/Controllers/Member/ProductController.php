@@ -70,9 +70,20 @@ class ProductController extends Controller
     public function home()
     {
         return view('frontend.products.home', [
-            'products' => Product::with(['category', 'brand', 'images'])
+            'products' => Product::select(
+                'id',
+                'name',
+                'price',
+                'category_id',
+                'brand_id',
+                'created_at'
+            )
+                ->with([
+                    'category:id,name',
+                    'brand:id,name',
+                    'images:id,product_id,image'
+                ])
                 ->latest()
-                ->orderBy('created_at', 'desc')
                 ->paginate(12),
             'categories' => Category::get(),
             'brands' => Brand::withCount('products')
